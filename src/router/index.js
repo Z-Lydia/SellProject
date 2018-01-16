@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/views/Login'
+import Loading from '@/views/Loading'
 import Customer from '@/views/Customer'
 import Search from '@/views/Search'
 import List from '@/views/List'
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/', //登录页
-      name: 'Login',
-      component: Login
+      name: 'Loading',
+      component: Loading
     },
     {
       path: '/customer', //客管页
