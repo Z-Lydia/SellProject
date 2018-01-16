@@ -1,0 +1,45 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Login from '@/views/Login'
+import Customer from '@/views/Customer'
+import Search from '@/views/Search'
+import List from '@/views/List'
+import Order from '@/views/Order'
+import Submit from '@/views/Submit'
+
+Vue.use(Router)
+
+export default new Router({
+  routes: [
+    {
+      path: '/', //登录页
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/customer', //客管页
+      name: 'Customer',
+      component: Customer
+    },
+    {
+      path: '/search', //查询页
+      name: 'Search',
+      component: Search
+    },
+    {
+      path: '/list', //缴款列表页
+      name: 'List',
+      component: List
+    },
+    {
+      path: '/order', //收单页
+      name: 'Order',
+      component: Order
+    },
+    {
+      path: '/submit', //提交页
+      name: 'Submit',
+      component: Submit
+    }
+  ]
+})
