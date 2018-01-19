@@ -17,102 +17,107 @@
                 <p>发运车牌号：{{orderTitle.carrier_carnum}}</p>
             </div>
 
-            <div class="white-bg weight-box" v-for="orderDetailItem in orderDetail">
-                <div class="type-box">
-                    <p>回收分类：<span>{{orderDetailItem.recycleTypeTitle}}</span></p>
-                </div>
-                <div class="weight-item">
-                    <div class="send">发运净重：<span class="gray">{{orderDetailItem.transportWeight/1000000}}T</span></div>
-                    <div class="receive">
-                        <span>到厂净重：</span>
-                        <input class="input" type="text" />
-                        <span class="gray">T</span>
+            <div>
+                <div>
+                    <div class="white-bg weight-box" v-for="orderDetailItem in orderDetail">
+                        <div class="type-box">
+                            <p>回收分类：<span>{{orderDetailItem.recycleTypeTitle}}</span></p>
+                        </div>
+                        <div class="weight-item">
+                            <div class="send">发运净重：<span class="gray">{{orderDetailItem.transportWeight/1000000}}T</span></div>
+                            <div class="receive">
+                                <span>到厂净重：</span>
+                                <input :ref="'orderDetailItem'+'affirmNet'" class="input" type="text" />
+                                <span class="gray">T</span>
+                            </div>
+                        </div>
+                        <div class="weight-item last-weight-item">
+                            <div class="send">发运包数：<span class="gray">{{orderDetailItem.packageNum}}个</span></div>
+                            <div class="receive">
+                                <span>到厂包数：</span>
+                                <input :ref="'orderDetailItem'+'affirmPackageNum'" class="input" type="text" />
+                                <span class="gray">个</span>
+                            </div>
+                        </div>
+                        <hr class="split" />
+                        <div class="white-bg counter-box">
+                            <div>
+                                <div class="counter-text">
+                                    <span>结算净重</span>
+                                    <span>结算单价</span>
+                                    <span>分类应收</span>
+                                </div>
+                                <div class="input-box">
+                                    <input type="text" @blur="handleGetWeight"/>
+                                    <span>*</span>
+                                    <input :ref="'orderDetailItem'+'unitPrice'" type="text" @blur="handleGetPrice" />
+                                    <span>=</span>
+                                    <input :ref="'orderDetailItem'+'totalPrice'" readonly type="text" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="weight-item last-weight-item">
-                    <div class="send">发运包数：<span class="gray">{{orderDetailItem.packageNum}}个</span></div>
-                    <div class="receive">
-                        <span>到厂包数：</span>
-                        <input class="input" type="text" />
-                        <span class="gray">个</span>
+                <!--结算-->
+                <div class="counter-box finnal-counter">
+                    <div class="weight-box">
+                        <div class="weight-item">
+                            <div class="send">发运毛重：<span class="gray">{{orderTitle.gross_weight/1000000}}T</span></div>
+                            <div class="receive">
+                                <span>到厂毛重：</span>
+                                <input v-model="affirmGross" class="input" type="text" />
+                                <span class="gray">T</span>
+                            </div>
+                        </div>
+                        <div class="weight-item">
+                            <div class="send">发运皮重：<span class="gray">{{orderTitle.tare_weight/1000000}}T</span></div>
+                            <div class="receive">
+                                <span>到厂皮重：</span>
+                                <input v-model="affirmTare" class="input" type="text" />
+                                <span class="gray">T</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <hr class="split" />
-                <div class="white-bg counter-box">
-                    <div>
+                    <div class="counter-bottom">
                         <div class="counter-text">
-                            <span>结算净重</span>
-                            <span>结算单价</span>
-                            <span>分类应收</span>
+                            <span>扣杂</span>
+                            <span>扣水</span>
+                            <span>运费</span>
                         </div>
-                        <div class="input-box">
-                            <input type="text" @blur="handleGetWeight"/>
-                            <span>*</span>
-                            <input type="text" @blur="handleGetPrice" />
-                            <span>=</span>
-                            <input readonly type="text" ref= />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--结算-->
-            <div class="counter-box finnal-counter">
-                <div class="weight-box">
-                    <div class="weight-item">
-                        <div class="send">发运毛重：<span class="gray">{{orderTitle.gross_weight/1000000}}T</span></div>
-                        <div class="receive">
-                            <span>到厂毛重：</span>
-                            <input v-model="affirmGross" class="input" type="text" />
-                            <span class="gray">T</span>
-                        </div>
-                    </div>
-                    <div class="weight-item">
-                        <div class="send">发运皮重：<span class="gray">{{orderTitle.tare_weight/1000000}}T</span></div>
-                        <div class="receive">
-                            <span>到厂皮重：</span>
-                            <input v-model="affirmTare" class="input" type="text" />
-                            <span class="gray">T</span>
+                        <div class="input-box" style="position: relative;">
+                            <input v-model="dross_percent" type="text" />
+                            <span>T</span>
+                            <input v-model="water_percent" type="text" />
+                            <span>T</span>
+                            <input v-model="car_money" type="text" />
+                            <span style="position: absolute;top: 0;">元</span>
                         </div>
                     </div>
                 </div>
-                <div class="counter-bottom">
-                    <div class="counter-text">
-                        <span>扣杂</span>
-                        <span>扣水</span>
-                        <span>运费</span>
-                    </div>
-                    <div class="input-box" style="position: relative;">
-                        <input v-model="dross_percent" type="text" />
-                        <span>T</span>
-                        <input v-model="warter_percent" type="text" />
-                        <span>T</span>
-                        <input v-model="car_money" type="text" />
-                        <span style="position: absolute;top: 0;">元</span>
-                    </div>
-                </div>
-            </div>
 
-            <div class="white-bg upload-box">
-                <div class="upload">
-                    <span>拍照：</span>
-                      <div class="right-box imgs">
-                        <div class="pics">
+                <div class="white-bg upload-box">
+                    <div class="upload">
+                        <span>上传单据照片：</span>
+                          <div class="right-box imgs">
+                            <div class="upload">
+                                <img src="/static/images/camera.png">
+                                <input ref="photo" type="file" class="file" @change="doUpload">
+                            </div>
+                          </div>
+                    </div>
+                    <div class="pics" v-show="imagePath">
+                        <img :src="imagePath">
+                    </div>
+                    <div class="upload ps">
+                        <span>备注：</span>
+                        <div class="right-box text">
+                            <textarea ref="message" rows="4" placeholder="请填写备注"></textarea>
                         </div>
-                        <div class="upload">
-                            <img src="/static/images/camera.png">
-                            <input type="file" class="file">
-                        </div>
-                      </div>
-                </div>
-                <div class="upload ps">
-                    <span>备注：</span>
-                    <div class="right-box text">
-                        <textarea rows="4" placeholder="请填写备注"></textarea>
                     </div>
                 </div>
-            </div>
-            <div class="btn-box">
-                <span class="save-btn" @click="hindleSubmitClick">收单</span>
+                <div class="btn-box">
+                    <span class="save-btn" @click="hindleSubmitClick">收单</span>
+                </div>
             </div>
         </div>
     </div>
@@ -129,52 +134,105 @@
                 orderDetail:[],//分类信息
                 weight:'',//结算净重
                 price:'',//结算单价
-                // affirmPackageNum:'',//到厂包数
                 affirmGross:'',//到厂毛重
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
-                warter_percent:'',//扣水
-                car_money:''//运费
+                water_percent:'',//扣水
+                car_money:'',//运费
+                infoArr:[],
+                Submit:'Submit',
+                imagePath:''
             } 
         },
         components:{
           
         },
         methods:{
-            //新增客户模态框
-            addModal(){
-                this.mdShowFlag = true;
-                this.overlayFlag = true;
-            },
-            //关闭模态框
-            closeModal(){
-                this.mdShowFlag = false;
-                this.overlayFlag = false;
-            },
-            //关闭遮罩
-            closePop(){
-                this.mdShowFlag = false;
-                this.overlayFlag = false;
-            },
             handleGetWeight(e){
-                this.weight = Number(e.target.value);
+                var target = e.target;
+                var total = target.parentNode.lastChild;
+                this.weight = e.target.value;
                 if( this.price ){
-                    this.$refs.total.value=this.weight*this.price
+                    total.value=this.weight*this.price
+                    this.weight=0
+                    this.price=0
                 }else{
-                    this.$refs.total.value=""
+                    total.value=""
                 }
             },
             handleGetPrice(e){
                 var target = e.target;
-                this.price = Number(e.target.value);
+                var total = target.parentNode.lastChild;
+                this.price = e.target.value;
                 if( this.weight ){
-                    this.$refs.total.value=this.weight*this.price
+                    total.value=this.weight*this.price
+                    this.weight=0
+                    this.price=0
                 }else{
-                    this.$refs.total.value=""
+                    total.value=""
                 }
             },
-            hindleSubmitClick(){
+            doUpload(e){
+                var that = this;
+                var files = e.target.files[0];
+                if( files ){
+                    var File = new FileReader();
+                    File.onload = function(){
+                        that.imagePath = this.result;
+                    }
+                    File.readAsDataURL(files);
+                }
                 
+            },
+            hindleSubmitClick(){
+                //分类信息
+                this.orderDetail.map( (value,index) =>{
+                    const affirmWeightArr = this.$refs.orderDetailItemaffirmNet;
+                    const orderDetailItem = value;
+                    affirmWeightArr.map( (value,index) =>{
+                        const affirmWeight = value.value*1000000;
+                        orderDetailItem.affirmWeight = affirmWeight
+
+                    } );
+                    const affirmPackageNumArr = this.$refs.orderDetailItemaffirmPackageNum;
+                    affirmPackageNumArr.map( (value,map) =>{
+                        const affirmPackageNum = value.value;
+                        orderDetailItem.affirmPackageNum = affirmPackageNum;
+                    } );
+                    const unitPriceArr = this.$refs.orderDetailItemunitPrice;
+                    unitPriceArr.map( (value,map) =>{
+                        const unitPrice = value.value*1000;
+                        orderDetailItem.unitPrice = unitPrice;
+                    } );
+                    const totalPriceArr = this.$refs.orderDetailItemtotalPrice;
+                    totalPriceArr.map( (value,index) =>{
+                        const totalPrice = value.value*1000;
+                        orderDetailItem.totalPrice = totalPrice
+                    } )
+                } );
+                //订单信息
+                this.orderTitle.affirmGross = this.affirmGross*1000000;
+                this.orderTitle.affirmTare = this.affirmTare*1000000;
+                this.orderTitle.dross_percent = this.dross_percent*1000000;
+                this.orderTitle.water_percent = this.water_percent*1000000;
+                this.orderTitle.car_money = this.car_money*1000;
+                this.orderTitle.comment = this.$refs.message.value;
+                this.orderTitle.imagePath = this.imagePath
+                //到达时间
+                const date = new Date().toLocaleString();
+                this.orderTitle.addirmTime = date;
+                //localStorag
+                const orderTitleInfo = JSON.stringify(this.orderTitle)
+                const orderDetailInfoArr=[];
+                this.orderDetail.map( (value,index) =>{
+                    orderDetailInfoArr.push( JSON.stringify(value) )
+                } )
+                const orderDetailInfo = orderDetailInfoArr.toString();
+                console.log( orderDetailInfo );
+                const storage=window.localStorage;
+                storage.orderTitleInfo = orderTitleInfo;
+                storage.orderDetailInfo = orderDetailInfo
+                this.$router.push( {name:this.Submit});
             }
         },
         mounted(){

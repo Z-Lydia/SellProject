@@ -197,7 +197,6 @@
             axios.get("/transreceipt/translist?empId=1&&orderState=3")
             .then((response) =>{
                 this.orderlist = response.data.data;
-                console.log(this.orderlist)
                 this.orderlist.map( (value,index) =>{
                     this.routerlinkId = value.order_num
                 } );
