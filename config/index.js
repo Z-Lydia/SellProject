@@ -8,7 +8,7 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    productionSourceMap: true,
+    productionSourceMap: false,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
@@ -33,6 +33,9 @@ module.exports = {
       },
       '/paymentof/*':{
         target:'http://192.168.89.1:8080/sound-recycle-sales/'
+      },
+      '/weChatDoAuth/*':{
+        target:'http://wangCH.free.ngrok.cc/weChatDoAuth/'
       },
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
