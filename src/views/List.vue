@@ -17,8 +17,8 @@
             <div class="white-bg recycle-type">
                 <div class="recycle-top">
                     <span>回收类别</span>
-                    <p v-show="this.checkValue.length" class="variety">{{filterCheckValues}}</p>
-                    <img v-show="this.checkValue.length===0" class="add-icon" src="/static/images/add-icon.png" alt="" @click="handleKindSelect">
+                    <p v-show="checkValue.length" class="variety">{{filterCheckValues}}</p>
+                    <img v-show="checkValue.length===0" class="add-icon" src="/static/images/add-icon.png" alt="" @click="handleKindSelect">
                 </div>
                 <div class="content">
                     <ul class="recycle-list">
@@ -86,7 +86,7 @@
                     <span @click="handleKindConfirmClick">确定</span>
                 </div>
                 <div>
-                    <ul class="kind_list" @click="">
+                    <ul class="kind_list">
                         <li class="kind_list_item" v-for="typelistItem in typelist">
                             <label  for="1">{{typelistItem.title}}</label>
                             <input id="1" :value="typelistItem.title" v-model="checkValue" class="kind_checkox" type="checkbox">
