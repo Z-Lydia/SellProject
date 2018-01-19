@@ -71,6 +71,7 @@
 							<input :id="typelistItem.id"
 							       :value="typelistItem.title"
 							       @click="handleChange"
+							       ref="checkbox"
 							       class="kind_checkox"
 							       type="checkbox">
 						</li>
@@ -262,6 +263,14 @@
 					if(res.data.code == 0){
 						let data = res.data.data
 						this.offerpricelist = data
+						//清空回收类别
+						this.types = []
+						this.typesArr = []
+						//去掉checkbox选中状态
+						let elms = this.$refs.checkbox
+						for(let i = 0; i < elms.length; i ++){
+						    this.$set(elms[i], 'checked', false)
+						}
 					}else{
 						Toast({
 							mes: res.data.msg,
@@ -269,8 +278,7 @@
 							icon: 'fail'
 						})
 					}
-				});
-
+				})
 			}
 		},
 		mounted() {
@@ -287,6 +295,7 @@
 		position: fixed;
 		width: 100%;
 		top: 0;
+		background: #f5f5f5;
 	}
 
 	.header {
