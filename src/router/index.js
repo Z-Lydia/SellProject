@@ -6,6 +6,7 @@ import Search from '@/views/Search'
 import List from '@/views/List'
 import Order from '@/views/Order'
 import Submit from '@/views/Submit'
+import Detail from '@/views/Detail'
 
 Vue.use(Router)
 
@@ -32,7 +33,7 @@ export default new Router({
       component: List
     },
     {
-      path: '/order', //收单页
+      path: '/order/:id', //收单页
       name: 'Order',
       component: Order
     },
@@ -40,6 +41,11 @@ export default new Router({
       path: '/submit', //提交页
       name: 'Submit',
       component: Submit
+    },
+    {
+      path: '/detail/:id', //详情页
+      name: 'Detail',
+      component: Detail
     }
   ]
 })

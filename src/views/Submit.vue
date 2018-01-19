@@ -1,207 +1,177 @@
 <template>
-  <div class="gray-wrapper">
-    <header class="header white-bg">
-      <h1>销售帐薄</h1>
-      <img class="add-people" src="/static/images/add-people.png" @click="addModal">
-    </header>
+    <div class="gray-wrapper">
+        <header class="header white-bg">
+            <h1>销售帐薄</h1>
+            <img class="add-people" src="/static/images/add-people.png" @click="addModal">
+        </header>
 
-    <div class="content">
-      <!-- 订单详情 -->
-      <div class="white-bg list-item">
-        <div class="item-top">
-          <p class="order-num">订单编号：2345678900987654321</p>
-          <p>A打包站百合打包站</p>
-          <p><img src="/static/images/enter-icon.png" alt="">纸厂D</p>
-        </div>
-        <div class="item-bottom">
-          <p>
-            <label>司机姓名：</label>
-            <span>张得</span>
-          </p>
-          <p>
-            <label>司机手机号：</label>
-            <span>13245454545</span>
-          </p>
-          <p>
-            <label>车牌号：</label>
-            <span>京A 12345</span>
-          </p>
-        </div>
-        <div class="date-box">
-          <label>到场日期：</label>
-          <input type="text" class="date" placeholder="请选择日期" readonly />
-        </div>
-      </div>
+        <div class="content">
+            <!-- 订单详情 -->
+            <div class="white-bg list-item">
+                <div class="item-top">
+                    <p class="order-num">订单编号：2345678900987654321</p>
+                    <p>A打包站百合打包站</p>
+                    <p><img src="/static/images/enter-icon.png" alt="">纸厂D</p>
+                </div>
+                <div class="item-bottom">
+                    <p>
+                        <label>司机姓名：</label>
+                        <span>张得</span>
+                    </p>
+                    <p>
+                        <label>司机手机号：</label>
+                        <span>13245454545</span>
+                    </p>
+                    <p>
+                        <label>车牌号：</label>
+                        <span>京A 12345</span>
+                    </p>
+                </div>
+                <div class="date-box">
+                    <label>到场日期：</label>
+                    <input readonly />
+                </div>
+            </div>
 
-      <!-- 回收品类 -->
-      <div class="white-bg recycle-box">
-        <div class="recycle-title">
-          回收品类：A类
+            <!-- 回收品类 -->
+            <div class="white-bg recycle-box">
+                <div class="recycle-title">
+                  回收品类：A类
+                </div>
+                <div class="recycle-content">
+                    <!-- <div class="recycle-item">
+                        <div>
+                            <label>毛重：</label>
+                            <input type="text" value="10T" readonly>
+                        </div>
+                        <div>
+                            <label>到厂毛重：</label>
+                            <input type="text" value="10T" readonly>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>皮重：</label>
+                            <input type="text" value="2T" readonly>
+                        </div>
+                        <div>
+                            <label>到厂皮重：</label>
+                            <input type="text" value="2T" readonly>
+                        </div>
+                    </div> -->
+                    <div class="recycle-item">
+                        <div>
+                            <label>净重：</label>
+                            <input type="text" value="8T" readonly>
+                        </div>
+                        <div>
+                            <label>到厂净重：</label>
+                            <input type="text" value="8T" readonly>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>发运包数：</label>
+                            <input type="text" value="8个" readonly>
+                        </div>
+                        <div>
+                            <label>到厂包数：</label>
+                            <input type="text" value="8个" readonly>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>结算净重：</label>
+                            <input type="text" value="2T" readonly>
+                        </div>
+                        <div>
+                            <label>结算单价：</label>
+                            <input type="text" value="2T" readonly>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>分类应收：</label>
+                            <input type="text" value="25" readonly>
+                        </div>
+                    </div>
+                    <!-- <div class="recycle-item">
+                        <div>
+                            <label>扣杂：</label>
+                            <input type="text" value="8个" readonly>
+                        </div>
+                        <div>
+                            <label>扣水：</label>
+                            <input type="text" value="8个" readonly>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <!--结算-->
+            <div class="white-bg recycle-box">
+                <div class="recycle-content">
+                    <div class="recycle-item">
+                        <div>
+                            <label>皮重：</label>
+                            <span>1T</span>
+                        </div>
+                        <div>
+                            <label>到厂皮重：</label>
+                            <span>1T</span>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>毛重：</label>
+                            <span>1T</span>
+                        </div>
+                        <div>
+                            <label>到厂毛重：</label>
+                            <span>1T</span>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>扣杂：</label>
+                            <span>1T</span>
+                        </div>
+                        <div>
+                            <label>扣水：</label>
+                            <span>1T</span>
+                        </div>
+                        <div>
+                            <label>运费：</label>
+                            <span>1元</span>
+                        </div>
+                    </div>
+                    <div class="recycle-item">
+                        <div>
+                            <label>应收总款：</label>
+                            <span>1元</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="recycle-content">
-          <div class="recycle-item">
-            <div>
-              <label>毛重：</label>
-              <input type="text" value="10T">
-            </div>
-            <div>
-              <label>到厂毛重：</label>
-              <input type="text" value="10T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>皮重：</label>
-              <input type="text" value="2T">
-            </div>
-            <div>
-              <label>到厂皮重：</label>
-              <input type="text" value="2T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>净重：</label>
-              <input type="text" value="8T">
-            </div>
-            <div>
-              <label>到厂净重：</label>
-              <input type="text" value="8T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>发运包数：</label>
-              <input type="text" value="8个">
-            </div>
-            <div>
-              <label>到厂包数：</label>
-              <input type="text" value="8个">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>结算净重：</label>
-              <input type="text" value="2T">
-            </div>
-            <div>
-              <label>结算单价：</label>
-              <input type="text" value="2T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>应收账款：</label>
-              <input type="text" value="25">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>扣杂：</label>
-              <input type="text" value="8个">
-            </div>
-            <div>
-              <label>扣水：</label>
-              <input type="text" value="8个">
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- 回收品类 -->
-      <div class="white-bg recycle-box">
-        <div class="recycle-title">
-          回收品类：B类
+        <div class="white-bg sub-bottom">
+            <p>备注：</p>
+            <div class="ps">
+                <textarea placeholder="请填写备注"></textarea>
+            </div>
+            <p>纸厂回执：</p>
+            <div class="camera-box">
+                <img src="/static/images/camera2.png" alt="">
+                <input type="file" class="file">
+            </div>
         </div>
-        <div class="recycle-content">
-          <div class="recycle-item">
-            <div>
-              <label>毛重：</label>
-              <input type="text" value="10T">
-            </div>
-            <div>
-              <label>到厂毛重：</label>
-              <input type="text" value="10T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>皮重：</label>
-              <input type="text" value="2T">
-            </div>
-            <div>
-              <label>到厂皮重：</label>
-              <input type="text" value="2T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>净重：</label>
-              <input type="text" value="8T">
-            </div>
-            <div>
-              <label>到厂净重：</label>
-              <input type="text" value="8T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>发运包数：</label>
-              <input type="text" value="8个">
-            </div>
-            <div>
-              <label>到厂包数：</label>
-              <input type="text" value="8个">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>结算净重：</label>
-              <input type="text" value="2T">
-            </div>
-            <div>
-              <label>结算单价：</label>
-              <input type="text" value="2T">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>应收账款：</label>
-              <input type="text" value="25">
-            </div>
-          </div>
-          <div class="recycle-item">
-            <div>
-              <label>扣杂：</label>
-              <input type="text" value="8个">
-            </div>
-            <div>
-              <label>扣水：</label>
-              <input type="text" value="8个">
-            </div>
-          </div>
+
+        <div class="btn-group">
+            <span class="edit">修改</span>
+            <span class="submit">提交</span>
         </div>
-      </div>
+
     </div>
-
-    <div class="white-bg sub-bottom">
-      <p>备注：</p>
-      <div class="ps">
-        <textarea placeholder="请填写备注"></textarea>
-      </div>
-      <p>纸厂回执：</p>
-      <div class="camera-box">
-        <img src="/static/images/camera2.png" alt="">
-        <input type="file" class="file">
-      </div>
-    </div>
-
-    <div class="btn-group">
-      <span class="edit">修改</span>
-      <span class="submit">提交</span>
-    </div>
-
-  </div>
 </template>
 
 <script>
@@ -247,6 +217,7 @@
       flex: 1;
       text-align: center;
       font-size: 3.6rem;
+      font-weight: normal;
     }
     img{
       flex: 0 0 4rem;
@@ -317,12 +288,11 @@
 
           }
           input{
+            color: rgb(153,153,153);
             width: 15rem;
             height: 4rem;
             line-height: 4rem;
             text-indent: 5px;
-            color: #666;
-            border: 1px solid #ddd;
             border-radius: 5px;
           }
         }
@@ -339,9 +309,9 @@
     }
     .ps{
       textarea{
+        width: 95%;
         color: #666;
         font-family: '微软雅黑';
-        width: 100%;
         height: 15rem;
         padding: 1rem;
         border: 1px solid #ddd;

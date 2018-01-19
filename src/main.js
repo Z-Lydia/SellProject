@@ -13,28 +13,40 @@ Vue.config.productionTip = false
 
 const store = new Vuex.Store({
 	state:{
-		nickName:'',
-		cartCount:0
+		factorylist:[],
+		typelist:[],
+		offerpricelist:[]
 	},
-	getters:{
-		nickName(state){
-			return state.nickName + ',hello';
+	actions:{
+		getFactoryInfo( context ){
+			axios.get('paymentof/paperfactory')
+				.then( (response) =>{
+					if( response.status === 200 ){
+						context.commit( "changeFactoryInfo",response.data.data );
+					}
+				} )
+				.catch( (err) =>{
+					console.log(err);
+				} )
 		}
 	},
 	mutations:{
-		updateName(state,nickName){
-			state.nickName = nickName;
-		},
-		updateCartCount(state,num){
-			state.cartCount += num;
+		changeFactoryInfo( state,data ) {
+			state.factorylist = data.factorylist;
+			state.typelist = data.typelist;
+			state.offerpricelist = data.offerpricelist
 		}
 	},
-	actions:{
-		updateNameAction(context,nickName){
-			context.commit('updateName',nickName);
-		},
-		updateCounterAction(context,num){
-			context.commit('updateCartCount',num);
+	getters:{
+		shouldGetFactoryInfo( state ){
+			if( !state.factorylist.length&&
+				!state.typelist.length&&
+				!state.offerpricelist.length
+			){
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 })
