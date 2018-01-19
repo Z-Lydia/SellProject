@@ -2,32 +2,33 @@
 	<div class="gray-wrapper">
 		<div class="Top">
 			<header class="header white-bg">
-				<div class="filter">
+				<!--<div class="filter">
 					<span>报价</span>
 					<img src="/static/images/down-icon.png" alt="">
-				</div>
+				</div>-->
 				<h1>缴款列表</h1>
-				<img class="add-people" src="/static/images/add-people.png" @click="addModal">
+				<!--<img class="add-people" src="/static/images/add-people.png" @click="addModal">-->
 			</header>
 
 			<div class="Select" @click="handleSelectClick">
-				<p>选择纸厂<span class="SelectResult">{{this.Selected}}</span></p>
+				<p>选择纸厂<span class="SelectResult">{{this.Selected.text}}</span></p>
 			</div>
 
 			<div class="white-bg recycle-type">
 				<div class="recycle-top">
 					<span>回收类别</span>
-					<p v-show="this.checkValue.length" class="variety">{{filterCheckValues}}</p>
-					<img v-show="this.checkValue.length===0" class="add-icon" src="/static/images/add-icon.png" alt=""
+					<p v-show="checkValue.length" class="variety">{{filterCheckValues}}</p>
+					<img v-show="checkValue.length===0" class="add-icon" src="/static/images/add-icon.png" alt=""
 					     @click="handleKindSelect">
 				</div>
 				<div class="content">
 					<ul class="recycle-list">
-						<li>
-							<label>回收类别明细</label>
+						<p v-if="types.length == 0">请先选择回收分类</p>
+						<li v-for="(item, index) in types">
+							<label>回收类别明细：{{item.value}}</label>
 							<div class="now-price">
 								<b>税前现价</b>
-								<input type="text" class="input">
+								<input type="text" class="input" :id="item.id" ref="PriceInput">
 								<span>元/T</span>
 							</div>
 						</li>
@@ -38,41 +39,18 @@
 				</div>
 			</div>
 		</div>
-
+		<!--lists-->
 		<div class="white-bg list-wrapper">
-			<div class="list-item">
+			<div class="list-item" v-for="(item, index) in offerpricelist">
 				<div class="list-txt">
-					<p>报价纸厂：<span>H纸厂</span></p>
-					<p>报价类别：<span>黄纸</span></p>
-					<p>报价：<span>25元/T</span></p>
-				</div>
-				<!-- <a href="javascript:;" class="edit-btn">修改</a> -->
-			</div>
-			<div class="list-item">
-				<div class="list-txt">
-					<p>报价纸厂：<span>H纸厂</span></p>
-					<p>报价类别：<span>黄纸</span></p>
-					<p>报价：<span>25元/T</span></p>
-				</div>
-				<!-- <a href="javascript:;" class="edit-btn">修改</a> -->
-			</div>
-			<div class="list-item">
-				<div class="list-txt">
-					<p>报价纸厂：<span>H纸厂</span></p>
-					<p>报价类别：<span>黄纸</span></p>
-					<p>报价：<span>25元/T</span></p>
-				</div>
-				<!-- <a href="javascript:;" class="edit-btn">修改</a> -->
-			</div>
-			<div class="list-item">
-				<div class="list-txt">
-					<p>报价纸厂：<span>H纸厂</span></p>
-					<p>报价类别：<span>黄纸</span></p>
-					<p>报价：<span>25元/T</span></p>
+					<p>报价纸厂：<span>{{item.factoryName}}</span></p>
+					<p>报价类别：<span>{{item.typeName}}</span></p>
+					<p>报价：<span>{{item.recycleTypePrice}}元/T</span></p>
 				</div>
 				<!-- <a href="javascript:;" class="edit-btn">修改</a> -->
 			</div>
 		</div>
+		<!--Picker-->
 		<vue-pickers :show="show"
 		             :selectData="factorylist"
 		             v-on:cancel="close"
@@ -87,10 +65,13 @@
 					<span @click="handleKindConfirmClick">确定</span>
 				</div>
 				<div>
-					<ul class="kind_list" @click="">
+					<ul class="kind_list">
 						<li class="kind_list_item" v-for="typelistItem in typelist">
-							<label for="1">{{typelistItem.title}}</label>
-							<input id="1" :value="typelistItem.title" v-model="checkValue" class="kind_checkox"
+							<label :for="typelistItem.id">{{typelistItem.title}}</label>
+							<input :id="typelistItem.id"
+							       :value="typelistItem.title"
+							       @click="handleChange"
+							       class="kind_checkox"
 							       type="checkbox">
 						</li>
 					</ul>
@@ -103,29 +84,38 @@
 </template>
 
 <script>
+	import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
 	import VuePickers from 'vue-pickers'
 	import {mapState} from "vuex"
+	import axios from 'axios'
 
 	export default {
 		data() {
 			return {
-				Selected: "请选择纸厂",
+				Selected: {
+					text: '请选择纸厂',
+					id: ''
+				},
 				overlayFlag: false,
 				mdShowFlag: false,
 				kindBoxShow: false,
 				checkValue: [],
 				mask: false,
 				show: false,
+				offerpricelist: [],
+				types: [],
+				typesArr: [],
 			}
 		},
 		computed: mapState({
+			//工厂列表
 			factorylist(state) {
 				var factorylist = state.factorylist;
 				var pData1 = [];
 				for (var i = 0, l = factorylist.length; i < l; i++) {
 					var obj = {text: "", value: ""};
 					obj.text = factorylist[i].name;
-					obj.value = factorylist[i].name;
+					obj.value = factorylist[i].id;
 					pData1.push(obj);
 				}
 				var pickData = {
@@ -134,8 +124,14 @@
 				}
 				return pickData
 			},
+			//回收分类
 			typelist(state) {
 				return state.typelist;
+			},
+			//历史报价list
+			offerpricelistFn(state){
+				let offerpricelist = state.offerpricelist
+				this.offerpricelist = offerpricelist
 			},
 			filterCheckValues() {
 				var value = this.checkValue;
@@ -170,8 +166,9 @@
 				this.show = true;
 				this.mask = true;
 			},
+			//工厂选择
 			confirmFn(data) {
-				this.Selected = data.select1.text
+				this.Selected = data.select1
 				this.show = false;
 				this.mask = false;
 			},
@@ -188,21 +185,101 @@
 				this.kindBoxShow = false;
 				this.mask = false;
 			},
+			//checkbox
+			handleChange(e){
+				if(this.typesArr.length > 3){
+					Toast({
+						mes: '每次添加最多4条！',
+						timeout: 1500,
+						icon: 'error'
+					})
+					e.target.checked = false
+					return
+				}
+				let id = e.target.id
+				let value = e.target.value
+				let price = ''
+				if(e.target.checked && this.typesArr.length < 4){
+					this.typesArr.push({
+						id,
+						value,
+						price
+					})
+				}else{
+					//大于4条不允许在继续选中和添加
+					e.target.checked = false
+					this.typesArr = this.typesArr.filter( (item) => {
+						if(item.id != id) return item
+					})
+				}
+			},
 			handleKindConfirmClick() {
 				this.kindBoxShow = false;
 				this.mask = false;
-				console.log(this.checkValue)
+				this.types = this.typesArr
 			},
 			handlePublishClick() {
-				this.checkValue = [];
-				console.log(this.checkValue.length)
+				//工厂id
+				let factoryId = this.Selected.value
+				if( ! factoryId){
+					Toast({
+						mes: '请先选择工厂！',
+						timeout: 1500,
+						icon: 'error'
+					})
+					return
+				}
+				//回收类别id、回收类别价格
+				let typeids = []
+				let prices = []
+				if( ! this.types.length) {
+					Toast({
+						mes: '请先选择回收类别！',
+						timeout: 1500,
+						icon: 'error'
+					})
+					return
+				}else{
+					this.$refs.PriceInput.map( (item, index) => {
+						if(this.types[index].id == item.id){
+							this.types[index].price = item.value
+						}
+						return
+					})
+					this.types.map( (item) => {
+						typeids.push(item.id)
+						prices.push(item.price)
+					})
+				}
+
+				//提交数据
+				var params = new URLSearchParams()
+				params.append('factoryId', factoryId)
+				params.append('typeids', typeids.join(','))
+				params.append('prices', prices.join(','))
+				params.append('empId', 1)
+				axios.post('/paymentof/factorytype', params).then( (res) => {
+					if(res.data.code == 0){
+						let data = res.data.data
+						this.offerpricelist = data
+					}else{
+						Toast({
+							mes: res.data.msg,
+							timeout: 1500,
+							icon: 'fail'
+						})
+					}
+				});
+
 			}
 		},
 		mounted() {
 			if (this.$store.getters.shouldGetFactoryInfo) {
 				this.$store.dispatch("getFactoryInfo");
 			}
-			;
+			//aaa
+			//xx ad  asd
+			this.offerpricelistFn
 		}
 	}
 </script>
