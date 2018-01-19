@@ -277,8 +277,6 @@
 			if (this.$store.getters.shouldGetFactoryInfo) {
 				this.$store.dispatch("getFactoryInfo");
 			}
-			//aaa
-			//xx ad  asd
 			this.offerpricelistFn
 		}
 	}
