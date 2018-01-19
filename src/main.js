@@ -6,9 +6,10 @@ import router from './router'
 import Vuex from 'vuex'
 import axios from 'axios'
 import YDUI from 'vue-ydui'
-
+import 'vue-ydui/dist/ydui.rem.css'
 import '@/assets/css/main.css'
 
+Vue.use(YDUI);
 Vue.use(Vuex);
 Vue.config.productionTip = false
 
