@@ -18,11 +18,6 @@ export default new Router({
       component: Home
     },
     {
-      path: '/customer', //客管页
-      name: 'Customer',
-      component: Customer
-    },
-    {
       path: '/search', //查询页
       name: 'Search',
       component: Search
