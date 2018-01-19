@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import axios from 'axios';
   export default {
     data () {
       return {
@@ -20,15 +21,11 @@
       }
     },
     mounted(){
-      let code = this.$route.query.code;
-      //如果是微信内置浏览器，直接跳微信授权页
-      //if(!code && this.isWeiXin()){
-      if(!code){
-        console.log('跳转授权页');
-        //this.jumpToWxBind();
-      }else if(code){
-
-      }
+      axios.get('/weChatDoAuth/doAuth').then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      })
     },
     methods:{
       //检测是不是微信内置浏览器
@@ -39,13 +36,6 @@
         }else{ 
           return false; 
         } 
-      },
-      //微信授权
-      jumpToWxBind(){
-        //回调地址
-        var redirect_url = window.location.href;
-        var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd1553eb16d6f6e60&redirect_uri='+ encodeURIComponent(redirect_url) +'&response_type=code&scope=snsapi_userinfo&state=STATE%23wechat_redirect&connect_redirect=1#wechat_redirect';
-        window.location.href = url;
       }
     }
   }
