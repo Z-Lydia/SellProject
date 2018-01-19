@@ -97,10 +97,11 @@
                     <span>拍照：</span>
                       <div class="right-box imgs">
                         <div class="pics">
+                          <img :src="imagePath" alt="">
                         </div>
                         <div class="upload">
                             <img src="/static/images/camera.png">
-                            <input type="file" class="file">
+                            <input type="file" class="file" @change="doUpload">
                         </div>
                       </div>
                 </div>
@@ -134,7 +135,8 @@
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
                 warter_percent:'',//扣水
-                car_money:''//运费
+                car_money:'',//运费
+                imagePath:''
             } 
         },
         components:{
@@ -175,6 +177,15 @@
             },
             hindleSubmitClick(){
                 
+            },
+            doUpload(e){
+              var that = this;
+              var files = e.target.files[0];
+              var File = new FileReader();
+              File.onload = function(){
+                that.imagePath = this.result;
+              }
+              File.readAsDataURL(files);
             }
         },
         mounted(){
