@@ -143,6 +143,7 @@
 </template>
 
 <script>
+  //import util from '@/assets/js/util.js';
   import axios from 'axios';
   import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
   export default {
@@ -158,6 +159,10 @@
       // Toast({});
       // Notify({});
       // Loading({});
+      
+      //util.getCookie('userId');
+      //util.addCookie('userId','汤姆克鲁斯',2);
+      //util.delCookie('userId');
 
       //获取订单详情
       this.getInfo();
