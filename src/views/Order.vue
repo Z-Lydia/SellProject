@@ -321,7 +321,7 @@
     .counter-text{
       span{
         display: inline-block;
-        width: 12rem;
+        /*width: 12rem;*/
         &:nth-of-type(2){
           margin: 0 8rem;
         }
