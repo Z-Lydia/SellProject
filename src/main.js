@@ -36,7 +36,7 @@ const store = new Vuex.Store({
 		changeFactoryInfo( state,data ) {
 			state.factorylist = data.factorylist;
 			state.typelist = data.typelist;
-			state.offerpricelist = data.offerpricelist
+			state.offerpricelist = data.offerpricelist;
 		}
 	},
 	getters:{

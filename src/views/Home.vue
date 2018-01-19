@@ -21,11 +21,11 @@
       }
     },
     mounted(){
-      axios.get('/weChatDoAuth/doAuth').then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      })
+      // axios.get('/weChatDoAuth/doAuth').then((result) => {
+      //   console.log(result);
+      // }).catch((error) => {
+      //   console.log(error);
+      // })
     },
     methods:{
       //检测是不是微信内置浏览器
