@@ -7,6 +7,7 @@ import List from '@/views/List'
 //import Order from '@/views/Order'
 import Submit from '@/views/Submit'
 import Detail from '@/views/Detail'
+import Connect from '@/views/Connect'
 
 Vue.use(Router)
 
@@ -41,6 +42,11 @@ export default new Router({
       path: '/detail/:id', //详情页
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/connect', //账号关联
+      name: 'Connect',
+      component: Connect
     }
   ]
 })
