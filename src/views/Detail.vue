@@ -168,37 +168,37 @@
 </script>
 <style lang="less" scoped>
 	.header{
-	    padding: 0 2.5rem;
-	    height: 8.8rem;
-	    line-height: 8.8rem;
+	    padding: 0 .25rem;
+	    height: .88rem;
+	    line-height: .88rem;
 	    display: flex;
 	    align-items:center;
-	    margin-bottom: 1.5rem;
+	    margin-bottom: .15rem;
 	    h1{
 	      flex: 1;
 	      text-align: center;
-	      font-size: 3.6rem;
+	      font-size: .36rem;
 	      font-weight: normal;
 	    }
   	}
   	.content{
 	    .list-item{
-	      	margin-bottom: 1.8rem;
+	      	margin-bottom: .18rem;
 	      	p{
 	        	line-height: 1.6;
 	      	}
 	      	.item-top{
 	       		border-bottom: 1px solid #ddd;
-	        	padding: 2.5rem;
+	        	padding: .25rem;
 	        	p{
 
 	        	}
 	      }
 	      .item-bottom{
 	        border-bottom: 1px solid #ddd;
-	        padding: 2.5rem;
+	        padding: .25rem;
 	        p{
-	          	font-size: 2.8rem;
+	          	font-size: .28rem;
 	          	img{
 	            	vertical-align: middle;
 	          	}
@@ -211,10 +211,10 @@
 	        }
 	      }
 	      .date-box{
-	        height: 9rem;
-	        line-height: 9rem;
+	        height: .9rem;
+	        line-height: .9rem;
 	        display: flex;
-	        padding: 0 2.5rem;
+	        padding: 0 .25rem;
 	        label{
 
 	        }
@@ -226,28 +226,28 @@
   	}
 
   .recycle-box{
-    margin-bottom: 1.8rem;
+    margin-bottom: .18rem;
     .recycle-title{
-      height: 9rem;
-      line-height: 9rem;
-      padding-left: 2.5rem;
+      height: .9rem;
+      line-height: .9rem;
+      padding-left: .25rem;
       border-bottom: 1px solid #ddd;
     }
     .recycle-content{
       .recycle-item{
-        padding: 1rem 2.5rem;
+        padding: .1rem .25rem;
         display: flex;
         div{
           flex: 1;
-          font-size: 2.8rem;
+          font-size: .28rem;
           label{
 
           }
           span{
             color: rgb(153,153,153);
-            width: 15rem;
-            height: 4rem;
-            line-height: 4rem;
+            width: 1.5rem;
+            height: .4rem;
+            line-height: .4rem;
             text-indent: 5px;
             border-radius: 5px;
           }
@@ -257,18 +257,18 @@
   }
 
   .sub-bottom{
-    padding: 0 2.5rem 2.5rem 2.5rem;
-    margin-bottom: 1.8rem;
+    padding: 0 .25rem .25rem .25rem;
+    margin-bottom: .18rem;
     p{
-      height: 7rem;
-      line-height: 7rem;
+      height: .7rem;
+      line-height: .7rem;
     }
     .ps{
-      	margin-left: 5rem;
+      	margin-left: .5rem;
     }
     .camera-box{
       width: 100%;
-      height: 15rem;
+      height: 1.5rem;
       position: relative;
       img{
         width: 100%;

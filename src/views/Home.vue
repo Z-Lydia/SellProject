@@ -54,14 +54,14 @@
 
 .loader {
     overflow: hidden;
-    font-size: 4rem;
+    font-size: .4rem;
     text-align: center;
     display: inline-block;
-    min-width: 15rem;
+    min-width: 1.5rem;
     position: absolute;
     top: 45%;
     left: 50%;
-    margin-left: -7.5rem;
+    margin-left: -0.75rem;
 }
 
 .loader span {

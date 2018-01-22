@@ -121,86 +121,86 @@
     background: #f3f3f3;
   }
   .header{
-    padding: 0 2.5rem;
-    height: 8.8rem;
-    line-height: 8.8rem;
-    display: flex;
-    align-items:center;
-    margin-bottom: 1.5rem;
+      padding: 0 .25rem;
+      height: .88rem;
+      line-height: .88rem;
+      display: flex;
+      align-items:center;
+      margin-bottom: .15rem;
     h1{
       flex: 1;
       text-align: center;
-      font-size: 3.6rem;
+      font-size: .36rem;
     }
     img{
-      flex: 0 0 4rem;
-      width: 4rem;
-      height: 4rem;
+      flex: 0 0 .4rem;
+      width: .4rem;
+      height: .4rem;
     }
   }
   .container{
-    padding-top: 2.5rem;
+    padding-top: .25rem;
     .search-content{
-      height: 7rem;
-      line-height: 7rem;
-      margin: 0 2.5rem 2.5rem 2.5rem;
+      height: .7rem;
+      line-height: .7rem;
+      margin: 0 .25rem .25rem .25rem;
       display: flex;
       .search-box{
         flex: 1;
         background: #f3f3f3;
-        border-radius: 3rem;
+        border-radius: .3rem;
         color: #999;
         position: relative;
         .icon{
           position: absolute;
-          top: 2rem;
+          top: .2rem;
         }
         .search-icon{
-          left: 2rem;
+          left: .2rem;
         }
         .del-icon{
           position: absolute;
-          right: 2rem;
+          right: .2rem;
         }
         .keyword{
-          height: 7rem;
-          line-height: 7rem;
-          font-size: 3rem;
+          height: .7rem;
+          line-height: .7rem;
+          font-size: .3rem;
           background: none;
           position: absolute;
-          left: 6rem;
+          left: .6rem;
           top: 0;
         }
       }
       .search-btn{
-        flex: 0 0 9.5rem;
-        font-size: 3.2rem;
+        flex: 0 0 .95rem;
+        font-size: .32rem;
         text-align: right;
       }
     }
     ul.list{
       .list-item{
-        height: 11.2rem;
-        padding: 0 2.5rem;
+        height: 1.12rem;
+        padding: 0 .25rem;
         display: flex;
         border-top: 1px solid #ddd;
         align-items: center;
         .list-text{
           flex: 1;
           h3{
-            font-size: 3.2rem;
+            font-size: .32rem;
             color: #333;
           }
           p{
-            font-size: 3rem;
+            font-size: .3rem;
             color: #666;
           }
         }
         .tel{
-          flex: 0 0 4.4rem;
+          flex: 0 0 .44rem;
           img{
-            width: 4.4rem;
-            height: 4.4rem;
+            width: .44rem;
+            height: .44rem;
           }
         }
       }
@@ -214,7 +214,7 @@
     width: 90%;
     height: auto;
     margin: 0 auto;
-    padding: 2rem;
+    padding: .2rem;
     background: #fff;
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -237,14 +237,14 @@
 
   .modal-top{
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: .2rem;
     .back{
-      flex: 0 0 1.4rem;
-      width: 1.4rem;
-      height: 2.6rem;
+      flex: 0 0 .14rem;
+      width: .14rem;
+      height: .26rem;
     }
     h1{
-      font-size: 3.4rem;
+      font-size: .34rem;
       color: #333;
       font-weight: normal;
       flex: 1;
@@ -253,43 +253,43 @@
   }
   .modal-body{
     .form-group{
-      line-height: 6rem;
+      line-height: .6rem;
       display: flex;
-      margin-bottom: 2rem;
+      margin-bottom: .2rem;
       label{
-        flex: 0 0 15rem;
+        flex: 0 0 1.5rem;
       }
       .input-box{
         flex: 1;
         input{
           width: 86%;
-          height: 6rem;
-          line-height: 6rem;
+          height: .6rem;
+          line-height: .6rem;
           border: 1px solid #ddd;
-          font-size: 3rem;
-          text-indent: .5rem;
+          font-size: .3rem;
+          text-indent: .05rem;
         }
         .textarea{
           width: 86%;
           border: 1px solid #ddd;
-          font-size: 3rem;
-          text-indent: .5rem;
+          font-size: .3rem;
+          text-indent: .05rem;
         }
       }
       .linkman{
         position: relative;
         .album{
-          width: 4rem;
-          height: 4.4rem;
+          width: .4rem;
+          height: .44rem;
           position: absolute;
           right: 0;
-          top: 1rem;
+          top: .1rem;
         }
       }
     }
   }
   .modal-bottom{
-    margin: 5rem 0;
+    margin: .5rem 0;
     .save-btn{
       display: block;
       width: 80%;
@@ -297,10 +297,10 @@
       line-height: 8rem;
       margin: 0 auto;
       text-align: center;
-      font-size: 3.6rem;
+      font-size: .36rem;
       background: #00877c;
       color: #fff;
-      border-radius: 4rem;
+      border-radius: .4rem;
     }
   }
 </style>
