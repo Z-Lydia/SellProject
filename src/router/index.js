@@ -4,7 +4,7 @@ import Home from '@/views/Home'
 import Customer from '@/views/Customer'
 import Search from '@/views/Search'
 import List from '@/views/List'
-import Order from '@/views/Order'
+//import Order from '@/views/Order'
 import Submit from '@/views/Submit'
 import Detail from '@/views/Detail'
 
@@ -27,11 +27,11 @@ export default new Router({
       name: 'List',
       component: List
     },
-    {
-      path: '/order/:id', //收单页
-      name: 'Order',
-      component: Order
-    },
+    // {
+    //   path: '/order/:id', //收单页
+    //   name: 'Order',
+    //   component: Order
+    // },
     {
       path: '/submit', //提交页
       name: 'Submit',
