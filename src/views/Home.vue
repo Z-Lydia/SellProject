@@ -34,15 +34,7 @@
       })
     },
     methods:{
-      //检测是不是微信内置浏览器
-      isWeiXin(){ 
-        var ua = window.navigator.userAgent.toLowerCase(); 
-        if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
-          return true; 
-        }else{ 
-          return false; 
-        } 
-      }
+      
     }
   }
 </script>

@@ -125,6 +125,7 @@
 
 <script>
     import axios from 'axios'
+    import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
     export default {
         data () {
             return {
@@ -175,6 +176,22 @@
             doUpload(e){
                 var that = this;
                 var files = e.target.files[0];
+                if(!files.type.match(/(jpeg|jpg|gif|bmp|png)$/i)){
+                  Toast({
+                      mes:'图片格式不正确',
+                      timeout:1500,
+                      icon: 'error'
+                  })
+                  return;
+                }
+                if(files.size > 20*1024*1024){
+                  Toast({
+                      mes:'图片不能大于20M',
+                      timeout:1500,
+                      icon: 'error'
+                  })
+                  return;
+                }
                 if( files ){
                     var File = new FileReader();
                     File.onload = function(){

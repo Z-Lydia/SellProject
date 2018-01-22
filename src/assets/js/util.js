@@ -43,6 +43,15 @@ const util = {
 	//补零
 	toDou(n){
 	    return n >= 10 ? '' + n : '0' + n
+	},
+	//检测是不是微信内置浏览器
+	isWeiXin(){ 
+		var ua = window.navigator.userAgent.toLowerCase(); 
+		if(ua.match(/MicroMessenger/i) == 'micromessenger'){ 
+			return true; 
+		}else{ 
+			return false; 
+		} 
 	}
 }
 

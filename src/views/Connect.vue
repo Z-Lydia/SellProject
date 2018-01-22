@@ -72,7 +72,11 @@
                 }
                 axios.get('/login/boundsales?mobile=' + this.mobile).then((result)=>{
                     console.log(result);
-                    
+                    Toast({
+                        mes:'关联成功',
+                        timeout:1500,
+                        icon: 'success'
+                    })
                 }).catch((error) =>{
                     console.log(error);
                 })
