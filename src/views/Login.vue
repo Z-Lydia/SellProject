@@ -47,63 +47,63 @@
 <style lang="less" scoped>
 .login-bg{
   width: 100%;
-  height: 50rem;
+  height: .50rem;
   img{
     width: 100%;
     height: 100%;
   }
 }
 .login-box{
-  margin: 6rem;
+  margin: .6rem;
   .form-group{
-    height: 12rem;
-    line-height: 12rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
     margin-bottom: 0;
     border-bottom: 1px solid #e6e6e6;
     display: flex;
-    font-size: 3.2rem;
+    font-size: .32rem;
     color: #333;
     .num{
-      flex: 0 0 8.5rem;
+      flex: 0 0 .85rem;
     }
     .input{
       flex: 1;
       color: #bbb;
-      font-size: 3.2rem;
+      font-size: .32rem;
     }
     .del{
-      flex: 0 0 4rem;
-      width: 4rem;
-      height: 4rem;
-      margin-top: 4rem;
+      flex: 0 0 .4rem;
+      width: .4rem;
+      height: .4rem;
+      margin-top: .4rem;
     }
     .code{
       flex: 1;
-      font-size: 3.2rem;
+      font-size: .32rem;
     }
     .code-btn{
-      flex: 0 0 18rem;
-      height: 6.6rem;
-      line-height: 6.6rem;
-      margin-top: 2.7rem;
-      margin-left: 1rem;
+      flex: 0 0 1.8rem;
+      height: .66rem;
+      line-height: .66rem;
+      margin-top: .27rem;
+      margin-left: .1rem;
       text-align: center;
-      font-size: 3rem;
+      font-size: .3rem;
       color: #00877c;
       border: 1px solid #00877c;
       border-radius: 5px;
     }
   }
   .login-btn{
-    margin: 10rem 0;
+    margin: 1.0rem 0;
     a{
       display: block;
       width: 100%;
-      height: 8.8rem;
-      line-height: 8.8rem;
+      height: .88rem;
+      line-height: .88rem;
       text-align: center;
-      border-radius: 4rem;
-      font-size: 3.6rem;
+      border-radius: .4rem;
+      font-size: .36rem;
       color: #fff;
       background: #00877c;
       box-shadow: 2px 2px 5px rgba(0,0,0,.3);

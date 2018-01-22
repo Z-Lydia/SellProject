@@ -217,77 +217,78 @@
         display:none
     }
     .header{
-        padding: 0 2.5rem;
-        height: 8.8rem;
-        line-height: 8.8rem;
+        padding: 0 .25rem;
+        height: .88rem;
+        line-height: .88rem;
         display: flex;
         align-items:center;
         border-bottom: 1px solid #ddd;
         h1{
             flex: 1;
             text-align: center;
-            font-size: 3.6rem;
+            font-size: .36rem;
             font-weight:normal
         }
         img{
-            flex: 0 0 4rem;
-            width: 4rem;
-            height: 4rem;
+            flex: 0 0 .4rem;
+            width: .4rem;
+            height: .4rem;
         }
     }
     .Select{
-        height: 8.8rem;
-        margin-bottom: 2rem;
+        height: .88rem;
+        margin-bottom: .2rem;
         background: #fff;
         p{
-            font-size: 3rem;
+            font-size: .3rem;
             color: #333;
-            line-height: 8.8rem;
-            margin-left: 2.6rem;
+            line-height: .88rem;
+            margin-left: .26rem;
             .SelectResult{
-                max-width: 375px;
+                max-width: 3.75rem;
                 float: right;
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
-                margin-right: 2.6rem;
+                margin-right: .26rem;
             }
             .SelectResult:after{
                 content: url("/static/images/right-icon.png");
-                margin-left: 2rem;
+                margin-left: .2rem;
             }
         }
     }
     .noData{
         position: absolute;
-        top: 20rem;
+        top: .20rem;
         left: 0;
         right: 0;
         bottom: 0;
         background: #fff;
         text-align: center;
-        line-height: 10rem;
+        line-height: 1.0rem;
+	    font-size: .3rem;
     }
     .container{
-        margin-bottom: 9.6rem;
+        margin-bottom: .96rem;
     }
     .content{
         .list-item{
-            margin-bottom: 1.8rem;
+            margin-bottom: .18rem;
             p{
-                line-height: 1.6;
+                line-height: .16rem;
             }
             .item-top{
                 border-bottom: 1px solid #ddd;
-                padding: 2.5rem;
+                padding: .25rem;
                 p{
-                    font-size: 30px;
+                    font-size: .3rem;
                 }
             }
             .item-bottom{
-                padding: 2.5rem;
+                padding: .25rem;
                 p{
-                    font-size: 2.8rem;
+                    font-size: .28rem;
                     img{
                         vertical-align: middle;
                     }
@@ -304,12 +305,12 @@
     .footer{
         position: fixed;
         bottom: 0;
-        height: 9.6rem;
+        height: .96rem;
         width: 100%;
         background: #cce7e5;
-        font-size: 3.4rem;
+        font-size: .34rem;
         color: #00877c;
-        line-height: 9.6rem;
+        line-height: .96rem;
         .unfinished{
             float: left;
             width: 50%;
@@ -334,7 +335,7 @@
         width: 90%;
         height: auto;
         margin: 0 auto;
-        padding: 2rem;
+        padding: .2rem;
         background: #fff;
         -webkit-transform: translate(-50%, -50%);
         -ms-transform: translate(-50%, -50%);
@@ -357,14 +358,14 @@
 
     .modal-top{
         display: flex;
-        margin-bottom: 2rem;
+        margin-bottom: .2rem;
         .back{
-            flex: 0 0 1.4rem;
-            width: 1.4rem;
-            height: 2.6rem;
+            flex: 0 0 .14rem;
+            width: .14rem;
+            height: .26rem;
         }
         h1{
-            font-size: 3.4rem;
+            font-size: .34rem;
             color: #333;
             font-weight: normal;
             flex: 1;
@@ -373,54 +374,54 @@
     }
     .modal-body{
         .form-group{
-            line-height: 6rem;
+            line-height: .6rem;
             display: flex;
-            margin-bottom: 2rem;
+            margin-bottom: .2rem;
             label{
-                flex: 0 0 15rem;
+                flex: 0 0 1.5rem;
             }
           .input-box{
             flex: 1;
             input{
                 width: 86%;
-                height: 6rem;
-                line-height: 6rem;
+                height: .6rem;
+                line-height: .6rem;
                 border: 1px solid #ddd;
-                font-size: 3rem;
-                text-indent: .5rem;
+                font-size: .3rem;
+                text-indent: .05rem;
             }
             .textarea{
                 width: 86%;
                 border: 1px solid #ddd;
-                font-size: 3rem;
-                text-indent: .5rem;
+                font-size: .3rem;
+                text-indent: .05rem;
             }
           }
           .linkman{
             position: relative;
             .album{
-                width: 4rem;
-                height: 4.4rem;
+                width: .4rem;
+                height: .44rem;
                 position: absolute;
                 right: 0;
-                top: 1rem;
+                top: .1rem;
             }
           }
         }
     }
     .modal-bottom{
-        margin: 5rem 0;
+        margin: .5rem 0;
         .save-btn{
             display: block;
             width: 80%;
-            height: 8rem;
-            line-height: 8rem;
+            height: .8rem;
+            line-height: .8rem;
             margin: 0 auto;
             text-align: center;
-            font-size: 3.6rem;
+            font-size: .36rem;
             background: #00877c;
             color: #fff;
-            border-radius: 4rem;
+            border-radius: .4rem;
         }
     }
 </style>

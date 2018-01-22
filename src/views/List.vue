@@ -23,7 +23,7 @@
 				</div>
 				<div class="content">
 					<ul class="recycle-list">
-						<p v-if="types.length == 0">请先选择回收分类</p>
+						<p v-if="types.length == 0" class="noData">请先选择回收分类</p>
 						<li v-for="(item, index) in types">
 							<label>回收类别明细：{{item.value}}</label>
 							<div class="now-price">
@@ -299,9 +299,9 @@
 	}
 
 	.header {
-		padding: 0 2.5rem;
-		height: 8.8rem;
-		line-height: 8.8rem;
+		padding: 0 .25rem;
+		height: .88rem;
+		line-height: .88rem;
 		display: flex;
 		align-items: center;
 		margin-bottom: 4px;
@@ -311,72 +311,77 @@
 				color: #666;
 			}
 			img {
-				width: 2rem;
-				height: 1rem;
+				width: .2rem;
+				height: .1rem;
 			}
 		}
 		h1 {
 			flex: 1;
 			text-align: center;
-			font-size: 3.6rem;
+			font-size: .36rem;
 			font-weight: normal;
 		}
 		& > img {
-			flex: 0 0 4rem;
-			width: 4rem;
-			height: 4rem;
+			flex: 0 0 .4rem;
+			width: .4rem;
+			height: .4rem;
 		}
 	}
 
 	.Select {
-		height: 8.8rem;
-		margin-bottom: 2rem;
+		height: .88rem;
+		margin-bottom: .2rem;
 		background: #fff;
 		p {
-			font-size: 3rem;
+			font-size: .3rem;
 			color: #333;
-			line-height: 8.8rem;
-			margin-left: 2.6rem;
+			line-height: .88rem;
+			margin-left: .26rem;
 			.SelectResult {
-				max-width: 375px;
+				max-width: 3.75rem;
 				float: right;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
-				margin-right: 2.6rem;
+				margin-right: .26rem;
 			}
 			.SelectResult:after {
 				content: url("/static/images/right-icon.png");
-				margin-left: 2rem;
+				margin-left: .2rem;
 			}
 		}
 	}
 
 	.recycle-type {
 		.recycle-top {
-			height: 9rem;
-			line-height: 9rem;
-			padding: 0 2.5rem;
+			height: .9rem;
+			line-height: .9rem;
+			padding: 0 .25rem;
 			display: flex;
 			align-items: center;
 			span {
 				flex: 1;
-				font-size: 3.2rem;
+				font-size: .32rem;
 			}
 			.add-icon {
-				width: 4rem;
-				height: 4rem;
-				flex: 0 0 4rem;
+				width: .4rem;
+				height: .4rem;
+				flex: 0 0 .4rem;
 			}
 		}
 		.content {
 			border-top: 1px solid #ddd;
-			padding: 2.5rem;
+			padding: .25rem;
+			.noData{
+				font-size: .3rem;
+				color: #999;
+				text-align: center;;
+			}
 			.recycle-list {
 				li {
-					height: 3.6rem;
-					line-height: 3.6rem;
-					margin-bottom: 1.5rem;
+					height: .36rem;
+					line-height: .36rem;
+					margin-bottom: .15rem;
 					display: flex;
 					label {
 						flex: 1;
@@ -386,11 +391,11 @@
 							font-weight: normal;
 						}
 						.input {
-							width: 7.5rem;
-							height: 3.6rem;
-							line-height: 3.6rem;
+							width: .75rem;
+							height: .36rem;
+							line-height: .36rem;
 							color: #666;
-							margin: 0 1rem;
+							margin: 0 .1rem;
 							text-indent: 5px;
 							border: 1px solid #ddd;
 							border-radius: 5px;
@@ -399,7 +404,7 @@
 							}
 						}
 						span {
-							font-size: 2.8rem;
+							font-size: .28rem;
 							color: #999;
 						}
 					}
@@ -407,17 +412,17 @@
 			}
 		}
 		.recycle-box {
-			height: 11.6rem;
-			line-height: 11.6rem;
+			height: 1.16rem;
+			line-height: 1.16rem;
 			text-align: center;
-			margin-bottom: 1.8rem;
+			margin-bottom: .18rem;
 			.recycle-btn {
 				display: inline-block;
-				width: 20rem;
-				height: 5.6rem;
-				line-height: 5.6rem;
+				width: 2.0rem;
+				height: .56rem;
+				line-height: .56rem;
 				text-align: center;
-				font-size: 2.8rem;
+				font-size: .28rem;
 				color: #00877c;
 				border: 1px solid #00877c;
 				border-radius: 5px;
@@ -426,28 +431,28 @@
 	}
 
 	.list-wrapper {
-		margin-top: 53rem;
+		margin-top: 5..3rem;
 		.list-item {
-			padding: 2.5rem;
+			padding: .25rem;
 			display: flex;
 			align-items: center;
 			border-bottom: 1px solid #ddd;
 			.list-txt {
 				flex: 1;
 				p {
-					margin-bottom: 2rem;
+					margin-bottom: .2rem;
 					span {
 						color: #999;
 					}
 				}
 			}
 			.edit-btn {
-				flex: 0 0 13rem;
-				height: 5rem;
-				line-height: 5rem;
+				flex: 0 0 1.3rem;
+				height: .5rem;
+				line-height: .5rem;
 				text-align: center;
 				border: 1px solid #00877c;
-				font-size: 2.8rem;
+				font-size: .28rem;
 				color: #00877c;
 				border-radius: 5px;
 			}
@@ -459,19 +464,19 @@
 		bottom: 0;
 		background: #fff;
 		width: 100%;
-		height: 81.8rem;
+		height: 8.18rem;
 		z-index: 999;
 	}
 
 	.kind_btn_bar {
-		height: 9rem;
-		font-size: 3rem;
-		line-height: 9rem;
+		height: .9rem;
+		font-size: .3rem;
+		line-height: .9rem;
 		background: #f7f7f7;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 0 2.7rem;
+		padding: 0 .27rem;
 		color: #00877b;
 	}
 
@@ -480,7 +485,7 @@
 	}
 
 	.kind_list {
-		height: 72.8rem;
+		height: 7.28rem;
 		overflow: auto;
 	}
 
@@ -489,21 +494,21 @@
 	}
 
 	.kind_list_item {
-		height: 8.5rem;
+		height: .85rem;
 		border-bottom: 1px solid #eaeaea;
-		line-height: 8.5rem;
+		line-height: .85rem;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
-		padding: 0 2.7rem;
+		padding: 0 .27rem;
 	}
 
 	.kind_checkox {
 		-webkit-appearance: none;
 		background: url("/static/images/unselected-icon.png") center no-repeat;
-		height: 5rem;
-		width: 5rem;
-		margin: 1.7rem;
+		height: .5rem;
+		width: .5rem;
+		margin: .17rem;
 	}
 
 	.kind_checkox:checked {
