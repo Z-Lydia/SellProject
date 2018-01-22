@@ -5,7 +5,7 @@ div,ul,li,dl,dt,dd,img,p,h1,h2,h3,h4,h5,h6,b,span,em,strong,span,i,header,footer
 html,body{
 	/*height:100%;*/
 	color: #333;
-	font: 30px/1.5 "Microsoft YaHei";
+	font: 0.3rem/1.5 "Microsoft YaHei";
 }
 ul,li,ol{
 	list-style: none;
@@ -14,8 +14,8 @@ input,button,textarea,label{
 	resize: none;
 	border: none;
 	outline: none;
-	font-size: 3rem;
-	border-radius: 5px;
+	font-size: 0.3rem;
+	border-radius: 0.05rem;
 }
 a{
 	color: #333;

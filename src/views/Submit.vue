@@ -149,14 +149,14 @@
     export default {
         data () {
             return {
-                info: {"transMap":'',
-                        "transDetailList":''
-                        },
+                info: {
+                    "transMap":'',
+                    "transDetailList":''
+                },
                 Search:"Search"
             }
         },
         mounted(){
-            // this.$dialog.loading.open('很快加载好了');
             // Confirm({});
             // Alert({});
             // Toast({});
@@ -171,7 +171,7 @@
         methods:{
             //获取订单详情
             getInfo(){
-                const storage=window.localStorage;
+                const storage = window.localStorage;
                 const orderTitleInfo = storage.orderTitleInfo;
                 const orderDetailInfo = storage.orderDetailInfo;
                 const transMap = JSON.parse( orderTitleInfo );
@@ -252,7 +252,7 @@
         .list-item{
             margin-bottom: .18rem;
             p{
-                line-height: .16;
+                line-height: 1.6;
             }
             .item-top{
                 border-bottom: 1px solid #ddd;
@@ -265,7 +265,6 @@
                 border-bottom: 1px solid #ddd;
                 padding: .25rem;
                 p{
-                    font-size: .28rem;
                     img{
                         vertical-align: middle;
                     }
@@ -279,7 +278,7 @@
             }
             .date-box{
                 height: .9rem;
-                line-height: 9rem;
+                line-height: .9rem;
                 display: flex;
                 padding: 0 .25rem;
                 label{
