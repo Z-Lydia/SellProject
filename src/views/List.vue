@@ -339,15 +339,14 @@
 			margin-left: .26rem;
 			.SelectResult {
 				max-width: 3.75rem;
+				padding-right: .2rem;
 				float: right;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				margin-right: .26rem;
-			}
-			.SelectResult:after {
-				content: url("/static/images/right-icon.png");
-				margin-left: .2rem;
+				background: url("/static/images/right-icon.png") no-repeat right center;
+				background-size: .14rem .26rem;
 			}
 		}
 	}
