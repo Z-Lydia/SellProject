@@ -67,7 +67,7 @@
     position: absolute;
     top: 45%;
     left: 50%;
-    margin-left: -0.75rem;
+    margin-left: -1rem;
 }
 
 .loader span {
