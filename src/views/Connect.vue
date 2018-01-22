@@ -17,17 +17,17 @@
                         <label>手机号</label>
                         <div class="input-wrap">
                             <input type="text" class="phone" v-model="mobile" placeholder="请输入手机号码" />
-                            <span class="code-btn" @click="getCode()">{{codeText}}</span>
+    <!--                         <span class="code-btn" @click="getCode()">{{codeText}}</span> -->
                         </div>
                     </div>
-                    <div class="form-group white-bg" style="border-top: 1px solid #ddd;">
+<!--                     <div class="form-group white-bg" style="border-top: 1px solid #ddd;">
                         <label>验证码</label>
                         <div class="input-wrap">
                             <input type="text" v-model="code" placeholder="请输入验证码" />
                         </div>
-                    </div>
+                    </div> -->
                     <div class="text">
-                        验证通过后，可使用微信账号一键登录，无需注册。
+                        一键绑定，无需注册。
                     </div>
                     <a href="javascript:;" class="submit-btn" @click="connect()">确认关联</a>
                 </form>
@@ -38,6 +38,7 @@
 
 <script>
     import axios from 'axios'
+    import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
     export default {
         data () {
             return {
@@ -51,10 +52,30 @@
                 this.$router.go( -1 );
             },
             getCode(){
-
+                console.log('get code')
             },
             connect(){
-                
+                if(!this.mobile){
+                    Toast({
+                        mes:'请输入手机号码',
+                        timeout:1500,
+                        icon: 'error'
+                    })
+                    return;
+                }else if(!/^[1][3,4,5,7,8][0-9]{9}$/.test(this.mobile)){
+                    Toast({
+                        mes:'请输入正确的手机号码',
+                        timeout:1500,
+                        icon: 'error'
+                    })
+                    return;
+                }
+                axios.get('/login/boundsales?mobile=' + this.mobile).then((result)=>{
+                    console.log(result);
+                    
+                }).catch((error) =>{
+                    console.log(error);
+                })
             }
         },
         mounted(){

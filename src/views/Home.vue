@@ -21,10 +21,16 @@
       }
     },
     mounted(){
-      axios.get('/login/login').then((result) => {
+      axios.get('/sound-recycle-sales/').then((result)=>{
         console.log(result);
-      }).catch((error) => {
-        console.log(error);
+        let hkey = JSON.parse(result.headers.hkey);
+        console.log(hkey)
+        if(hkey.code == 1008){
+          console.log('--------该条绑定页面了')
+          this.$router.push({ path: '/connect' })
+        }else if(hkey.code == 0){
+          //判断角色 1 2 
+        }
       })
     },
     methods:{
