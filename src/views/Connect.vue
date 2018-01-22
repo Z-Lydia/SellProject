@@ -29,7 +29,7 @@
                     <div class="text">
                         一键绑定，无需注册。
                     </div>
-                    <a href="javascript:;" class="submit-btn" @click="connect()">确认关联</a>
+                    <a href="javascript:;" class="submit-btn" @click="handleConnect()">确认关联</a>
                 </form>
             </section>
         </div>
@@ -43,18 +43,18 @@
         data () {
             return {
                 mobile:'',
-                code:'',
-                codeText:'获取验证码'
+                //code:'',
+                //codeText:'获取验证码'
             }
         },
         methods:{
             handleReturnClick(){
                 this.$router.go( -1 );
             },
-            getCode(){
-                console.log('get code')
-            },
-            connect(){
+            // getCode(){
+            //     console.log('get code')
+            // },
+            handleConnect(){
                 if(!this.mobile){
                     Toast({
                         mes:'请输入手机号码',
