@@ -1,7 +1,7 @@
 <template>
 	<div class="gray-wrapper">
 		<header class="header white-bg">
-			<img class="add-people" src="/static/images/left-icon.png" @click="handleReturnClick">
+			<img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png" @click="handleReturnClick">
             <h1>销售帐薄</h1>
         </header>
 
@@ -11,7 +11,7 @@
                 <div class="item-top">
                     <p class="order-num">订单编号：{{orderTitle.order_num}}</p>
                     <p>{{orderTitle.package_site_name}}</p>
-                    <p><img src="/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
+                    <p><img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
                 </div>
                 <div class="item-bottom">
                     <p>
@@ -86,7 +86,7 @@
                             <span>{{orderTitle.dross_percent/1000000}}T</span>
                         </div>
                         <div>
-                            <label>扣水：</label>
+                            <label>扣税：</label>
                             <span>{{orderTitle.water_percent/1000000}}T</span>
                         </div>
                         <div>
@@ -131,7 +131,7 @@
             </div>
             <p>纸厂回执：</p>
             <div class="camera-box">
-                <img src="/static/images/camera2.png" alt="">
+                <img src="/sound-recycle-sales/static/images/camera2.png" alt="">
             </div>
         </div>
 	</div>
@@ -146,7 +146,7 @@
 	      	}
 	    },
 	    components:{
-	      
+
 	    },
 	    methods:{
 	    	handleReturnClick(){
@@ -154,7 +154,7 @@
 	    	}
 	    },
         mounted(){
-            axios.get( "/transreceipt/selectorderinfo?orderNum=50000311515480994470" )
+            axios.get(baseUrl + "/transreceipt/selectorderinfo?orderNum=50000311515480994470",{headers: {'X-Requested-With': 'XMLHttpRequest'}})
             .then( (response) =>{
                 const {transDetailList,transMap} = response.data;
                 this.orderTitle = transMap;

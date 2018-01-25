@@ -1,5 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -11,7 +9,7 @@ import '@/assets/css/main.css'
 
 Vue.use(YDUI);
 Vue.use(Vuex);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
 	state:{
@@ -21,7 +19,7 @@ const store = new Vuex.Store({
 	},
 	actions:{
 		getFactoryInfo( context ){
-			axios.get('paymentof/paperfactory')
+			axios.get(baseUrl + '/paymentof/paperfactory',{headers: {'X-Requested-With': 'XMLHttpRequest'}})
 				.then( (response) =>{
 					if( response.status === 200 ){
 						context.commit( "changeFactoryInfo",response.data.data );
@@ -58,7 +56,7 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { 
+  components: {
   	App
   }
 })

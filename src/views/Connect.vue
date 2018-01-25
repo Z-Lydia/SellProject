@@ -1,15 +1,15 @@
 <template>
     <div class="gray-wrapper main">
         <header class="header white-bg">
-            <img class="add-people" src="/static/images/left-icon.png" @click="handleReturnClick">
+            <img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png" @click="handleReturnClick">
             <h1>账号关联</h1>
         </header>
 
         <div class="container">
             <section class="content-top">
-                <img class="logo" src="/static/images/wx-logo.png" alt="logo">
-                <img class="icon" src="/static/images/connect-icon.png" alt="">
-                <img class="wx-pic" src="/static/images/wx.png" alt="wx">
+                <img class="logo" src="/sound-recycle-sales/static/images/wx-logo.png" alt="logo">
+                <img class="icon" src="/sound-recycle-sales/static/images/connect-icon.png" alt="">
+                <img class="wx-pic" src="/sound-recycle-sales/static/images/wx.png" alt="wx">
             </section>
             <section class="form-wrapper">
                 <form class="form">
@@ -38,7 +38,7 @@
 
 <script>
     import axios from 'axios'
-    import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
+    import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog'
     export default {
         data () {
             return {
@@ -70,20 +70,31 @@
                     })
                     return;
                 }
-                axios.get('/login/boundsales?mobile=' + this.mobile).then((result)=>{
+                axios.get(baseUrl + '/login/boundsales?mobile=' + this.mobile,{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((result)=>{
                     console.log(result);
-                    Toast({
-                        mes:'关联成功',
-                        timeout:1500,
-                        icon: 'success'
-                    })
+                    if(result.data.code == 0){
+                        Toast({
+                            mes:'关联成功',
+                            timeout:1500,
+                            icon: 'success',
+                            callback: () => {
+                                this.$router.push({ path: '/' });
+                            }
+                        })
+                    }else{
+                        Toast({
+                            mes:result.data.msg,
+                            timeout:1500,
+                            icon: 'error'
+                        })
+                    }
                 }).catch((error) =>{
                     console.log(error);
                 })
             }
         },
         mounted(){
-           
+
         }
     }
 </script>
@@ -156,7 +167,7 @@
         outline: none;
     }
     .form .form-group .input-wrap .phone{
-        
+
     }
     .form .form-group .input-wrap .code-btn{
         color: #00877c;

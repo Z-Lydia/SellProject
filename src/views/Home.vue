@@ -14,27 +14,39 @@
 
 <script>
   import axios from 'axios';
+  import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
   export default {
     data () {
       return {
-        
+
       }
     },
     mounted(){
-      axios.get('/sound-recycle-sales/').then((result)=>{
-        console.log(result);
-        let hkey = JSON.parse(result.headers.hkey);
-        console.log(hkey)
-        if(hkey.code == 1008){
-          console.log('--------该条绑定页面了')
-          this.$router.push({ path: '/connect' })
-        }else if(hkey.code == 0){
-          //判断角色 1 2 
-        }
+      //判断角色 0销售 1采集
+      axios.get(baseUrl + '/login/getusertype',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((res)=>{
+        console.log(res)
+          let data = res.data;
+          if(data.code === 0) {
+              if(data.data === 1){
+                  this.$router.push({ path: '/search' });
+              }else if(data.data === 0){
+                  this.$router.push({ path: '/list' });
+              }
+          }else if(data.code === 1008){
+              this.$router.push({ path: '/connect' });
+          }else{
+              Toast({
+                  mes:res.data.msg,
+                  timeout:1500,
+                  icon: 'error'
+              })
+          }
+      }).catch((error) =>{
+        console.log(error);
       })
     },
     methods:{
-      
+
     }
   }
 </script>

@@ -12,6 +12,7 @@ import Connect from '@/views/Connect'
 Vue.use(Router)
 
 export default new Router({
+  //mode: 'history',//'hash'则一切正常
   routes: [
     {
       path: '/', //loading

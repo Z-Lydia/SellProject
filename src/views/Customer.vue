@@ -1,17 +1,17 @@
 <template>
 	<div class="gray-wrapper">
 	  <header class="header white-bg">
-			<img class="add-icon" src="/static/images/add-icon.png" @click="addModal">
+			<img class="add-icon" src="/sound-recycle-sales/static/images/add-icon.png" @click="addModal">
 			<h1>销售帐薄</h1>
-			<img class="add-people" src="/static/images/add-people.png">
+			<img class="add-people" src="/sound-recycle-sales/static/images/add-people.png">
 		</header>
     <div class="white-bg container">
       <!-- 搜索区域 -->
       <div class="search-content">
         <div class="search-box">
-          <img src="/static/images/search-icon.png" class="icon search-icon">
+          <img src="/sound-recycle-sales/static/images/search-icon.png" class="icon search-icon">
           <input type="text" class="keyword" placeholder="请输入关键字搜索" />
-          <img src="/static/images/del-icon.png" class="icon del-icon">
+          <img src="/sound-recycle-sales/static/images/del-icon.png" class="icon del-icon">
         </div>
         <span class="search-btn">搜索</span>
       </div>
@@ -23,7 +23,7 @@
             <p>15810982222</p>
           </div>
           <div class="tel">
-            <img src="/static/images/tel-icon.png" alt="">
+            <img src="/sound-recycle-sales/static/images/tel-icon.png" alt="">
           </div>
         </li>
         <li class="list-item">
@@ -32,7 +32,7 @@
             <p>15810982222</p>
           </div>
           <div class="tel">
-            <img src="/static/images/tel-icon.png" alt="">
+            <img src="/sound-recycle-sales/static/images/tel-icon.png" alt="">
           </div>
         </li>
       </ul>
@@ -41,7 +41,7 @@
     <!-- 新增客户模态框 -->
     <div class="my-modal" v-show="mdShowFlag" v-on:close="closeModal">
       <div class="modal-top">
-        <img class="back" src="/static/images/left-icon.png" @click="closeModal">
+        <img class="back" src="/sound-recycle-sales/static/images/left-icon.png" @click="closeModal">
         <h1>新增客户</h1>
       </div>
       <div class="modal-body">
@@ -55,7 +55,7 @@
           <label class="">联系人：</label>
           <div class="input-box linkman">
             <input type="text" class="form-control" />
-            <img class="album" src="/static/images/album-icon.png" />
+            <img class="album" src="/sound-recycle-sales/static/images/album-icon.png" />
           </div>
         </div>
         <div class="form-group">
@@ -89,7 +89,7 @@
       }
     },
     components:{
-      
+
     },
     methods:{
       //新增客户模态框

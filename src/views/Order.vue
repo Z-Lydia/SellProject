@@ -2,7 +2,7 @@
     <div class="gray-wrapper">
         <header class="header white-bg">
             <router-link to="/search">
-                <img class="add-people" src="/static/images/left-icon.png">
+                <img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png">
             </router-link>
             <h1>销售帐薄</h1>
         </header>
@@ -11,7 +11,7 @@
             <div class="white-bg detail">
                 <p>订单编号：{{orderTitle.order_num}}</p>
                 <p>打包站名称：{{orderTitle.package_site_name}}</p>
-                <p><img src="/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
+                <p><img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
                 <p>司机姓名：{{orderTitle.carrier_name}}</p>
                 <p>司机手机：{{orderTitle.carrier_mobile}}</p>
                 <p>发运车牌号：{{orderTitle.carrier_carnum}}</p>
@@ -81,7 +81,7 @@
                     <div class="counter-bottom">
                         <div class="counter-text">
                             <span>扣杂</span>
-                            <span>扣水</span>
+                            <span>扣税</span>
                             <span>运费</span>
                         </div>
                         <div class="input-box" style="position: relative;">
@@ -100,7 +100,7 @@
                         <span>上传单据照片：</span>
                         <div class="right-box imgs">
                           <div class="upload">
-                              <img src="/static/images/camera.png">
+                              <img src="/sound-recycle-sales/static/images/camera.png">
                               <input ref="photo" type="file" class="file" @change="doUpload">
                           </div>
                         </div>
@@ -138,15 +138,15 @@
                 affirmGross:'',//到厂毛重
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
-                water_percent:'',//扣水
+                water_percent:'',//扣税
                 car_money:'',//运费
                 infoArr:[],
                 Submit:'Submit',
                 imagePath:''
-            } 
+            }
         },
         components:{
-          
+
         },
         methods:{
             handleGetWeight(e){
@@ -245,14 +245,14 @@
                 } )
                 const orderDetailInfo = orderDetailInfoArr.toString();
                 console.log( orderDetailInfo );
-                const storage=window.localStorage;
+                const storage = window.localStorage;
                 storage.orderTitleInfo = orderTitleInfo;
                 storage.orderDetailInfo = orderDetailInfo
                 this.$router.push( {name:this.Submit});
             }
         },
         mounted(){
-            axios.get( "/transreceipt/selectorderinfo?orderNum="+this.$route.params.id )
+            axios.get(baseUrl + "/transreceipt/selectorderinfo?orderNum="+this.$route.params.id,{headers: {'X-Requested-With': 'XMLHttpRequest'}} )
             .then( (response) =>{
                 const {transDetailList,transMap} = response.data;
                 this.orderTitle = transMap;
@@ -290,11 +290,11 @@
     padding: .25rem .25rem 0 .25rem;
     p{
       line-height: 1.8;
+      font-size: .28rem;
     }
   }
   .weight-box{
     margin: .18rem 0;
-/*    padding:0 .25rem .25rem .25rem;*/
     padding:0 .25rem;
     .type-box{
       height: .88rem;

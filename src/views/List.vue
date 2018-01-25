@@ -18,7 +18,7 @@
 				<div class="recycle-top">
 					<span>回收类别</span>
 					<p v-show="checkValue.length" class="variety">{{filterCheckValues}}</p>
-					<img v-show="checkValue.length===0" class="add-icon" src="/static/images/add-icon.png" alt=""
+					<img v-show="checkValue.length===0" class="add-icon" src="/sound-recycle-sales/static/images/add-icon.png" alt=""
 					     @click="handleKindSelect">
 				</div>
 				<div class="content">
@@ -28,7 +28,7 @@
 							<label>回收类别明细：{{item.value}}</label>
 							<div class="now-price">
 								<b>税前现价</b>
-								<input type="text" class="input" :id="item.id" ref="PriceInput">
+								<input type="text" class="input" :id="item.id" ref="PriceInput" onkeyup="this.value=this.value.replace(/[^\d\.]/g, '')">
 								<span>元/T</span>
 							</div>
 						</li>
@@ -233,6 +233,7 @@
 				//回收类别id、回收类别价格
 				let typeids = []
 				let prices = []
+				let flag = true
 				if( ! this.types.length) {
 					Toast({
 						mes: '请先选择回收类别！',
@@ -241,16 +242,28 @@
 					})
 					return
 				}else{
-					this.$refs.PriceInput.map( (item, index) => {
+					this.$refs.PriceInput.forEach( (item, index) => {
 						if(this.types[index].id == item.id){
 							this.types[index].price = item.value
 						}
-						return
 					})
-					this.types.map( (item) => {
+					this.types.forEach( (item) => {
 						typeids.push(item.id)
 						prices.push(item.price)
 					})
+				}
+				prices.forEach((item,index)=>{
+					if(!item || (item <= 0)){
+						flag = false
+					}
+				})
+				if(!flag){
+					Toast({
+						mes: '请正确填写回收分类价格',
+						timeout: 1500,
+						icon: 'error'
+					})
+					return false;
 				}
 
 				//提交数据
@@ -258,8 +271,7 @@
 				params.append('factoryId', factoryId)
 				params.append('typeids', typeids.join(','))
 				params.append('prices', prices.join(','))
-				params.append('empId', 1)
-				axios.post('/paymentof/factorytype', params).then( (res) => {
+				axios.post(baseUrl + '/paymentof/factorytype', params).then( (res) => {
 					if(res.data.code == 0){
 						let data = res.data.data
 						this.offerpricelist = data
@@ -292,9 +304,7 @@
 
 <style lang="less" scoped>
 	.Top {
-		position: fixed;
 		width: 100%;
-		top: 0;
 		background: #f5f5f5;
 	}
 
@@ -305,7 +315,7 @@
 		display: flex;
 		align-items: center;
 		margin-bottom: 4px;
-		box-shadow: 0 4px 4px rgba(0, 0, 0, .06);
+		box-shadow: 0 2px 2px rgba(0, 0, 0, .06);
 		.filter {
 			span {
 				color: #666;
@@ -345,7 +355,7 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				margin-right: .26rem;
-				background: url("/static/images/right-icon.png") no-repeat right center;
+				background: url("/sound-recycle-sales/static/images/right-icon.png") no-repeat right center;
 				background-size: .14rem .26rem;
 			}
 		}
@@ -388,6 +398,7 @@
 					.now-price {
 						b {
 							font-weight: normal;
+                            font-size: .28rem;
 						}
 						.input {
 							width: .75rem;
@@ -397,7 +408,6 @@
 							margin: 0 .1rem;
 							text-indent: 5px;
 							border: 1px solid #ddd;
-							border-radius: 5px;
 							&:active, &:focus {
 								border: 1px solid #00877c;
 							}
@@ -424,13 +434,11 @@
 				font-size: .28rem;
 				color: #00877c;
 				border: 1px solid #00877c;
-				border-radius: 5px;
 			}
 		}
 	}
 
 	.list-wrapper {
-		margin-top: 5..3rem;
 		.list-item {
 			padding: .25rem;
 			display: flex;
@@ -453,7 +461,6 @@
 				border: 1px solid #00877c;
 				font-size: .28rem;
 				color: #00877c;
-				border-radius: 5px;
 			}
 		}
 	}
@@ -504,14 +511,19 @@
 
 	.kind_checkox {
 		-webkit-appearance: none;
-		background: url("/static/images/unselected-icon.png") center no-repeat;
-		height: .5rem;
-		width: .5rem;
+		background: url("/sound-recycle-sales/static/images/unselected-icon.png") center center no-repeat;
+        background-size: 100% 100%;
+		height: .32rem;
+		width: .32rem;
 		margin: .17rem;
 	}
 
 	.kind_checkox:checked {
-		background: url("/static/images/selected-icon.png") center no-repeat;
+		background: url("/sound-recycle-sales/static/images/selected-icon.png") center center no-repeat;
+        background-size: 100% 100%;
+        height: .32rem;
+        width: .32rem;
+        margin: .17rem;
 	}
 
 	.fade-enter-active,

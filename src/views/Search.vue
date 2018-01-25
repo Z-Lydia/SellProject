@@ -14,23 +14,23 @@
                 <div v-for="orderlistItem in orderlist" class="white-bg list-item" @click="handleOrderClick" :id="orderlistItem.order_num">
                     <div class="item-top">
                         <p>{{orderlistItem.package_site_name}}</p>
-                        <img src="/static/images/enter-icon.png" alt="">
+                        <img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">
                         <p style="display: inline-block;">{{orderlistItem.recycle_factory_name}}</p>
                         <p class="order-num">订单编号：{{orderlistItem.order_num}}</p>
                     </div>
                     <div class="item-bottom">
                         <p>
-                           <img src="/static/images/user-icon.png" alt="">
+                           <img src="/sound-recycle-sales/static/images/user-icon.png" alt="">
                            <label>司机姓名：</label>
                            <span>{{orderlistItem.carrier_name}}</span>
                         </p>
                         <p>
-                           <img src="/static/images/tel-icon2.png" alt="">
+                           <img src="/sound-recycle-sales/static/images/tel-icon2.png" alt="">
                            <label>司机手机号：</label>
                            <span>{{orderlistItem.carrier_mobile}}</span>
                         </p>
                         <p>
-                           <img src="/static/images/card-icon.png" alt="">
+                           <img src="/sound-recycle-sales/static/images/card-icon.png" alt="">
                            <label>车牌号：</label>
                            <span>{{orderlistItem.carrier_carnum}}</span>
                         </p>
@@ -50,7 +50,7 @@
         <!-- 新增客户模态框 -->
         <div class="my-modal" v-show="mdShowFlag" v-on:close="closeModal">
             <div class="modal-top">
-                <img class="back" src="/static/images/left-icon.png" @click="closeModal">
+                <img class="back" src="/sound-recycle-sales/static/images/left-icon.png" @click="closeModal">
                 <h1>新增客户</h1>
             </div>
             <div class="modal-body">
@@ -64,7 +64,7 @@
                     <label class="">联系人：</label>
                     <div class="input-box linkman">
                         <input type="text" class="form-control" />
-                        <img class="album" src="/static/images/album-icon.png" />
+                        <img class="album" src="/sound-recycle-sales/static/images/album-icon.png" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -152,7 +152,8 @@
                 }else{
                     this.routerLink = "Detail"
                 }
-                 axios.get("/transreceipt/translist?empId=1&&factoryId="+this.factoryId+"&&orderState="+this.isSelect)
+                axios.get(baseUrl + "/transreceipt/translist?factoryId="+this.factoryId+"&orderState="+this.isSelect,
+                    {headers: {'X-Requested-With': 'XMLHttpRequest'}})
                 .then((response) =>{
                     this.orderlist = response.data.data;
                     this.orderlist.map( (value,index) =>{
@@ -173,7 +174,8 @@
                 this.factoryId = data.select1.value;
                 this.Selected = data.select1.text;
                 this.show = false
-                axios.get("/transreceipt/translist?empId=1&&factoryId="+this.factoryId+"&&orderState="+this.isSelect)
+                axios.get(baseUrl + "/transreceipt/translist?factoryId="+this.factoryId+"&orderState="+this.isSelect,
+                    {headers: {'X-Requested-With': 'XMLHttpRequest'}})
                 .then((response) =>{
                     this.orderlist = response.data.data;
                     this.orderlist.map( (value,index) =>{
@@ -194,7 +196,7 @@
             if (this.$store.getters.shouldGetFactoryInfo) {
                 this.$store.dispatch("getFactoryInfo");
             };
-            axios.get("/transreceipt/translist?empId=1&&orderState=3")
+            axios.get(baseUrl + "/transreceipt/translist?orderState=3",{headers: {'X-Requested-With': 'XMLHttpRequest'}})
             .then((response) =>{
                 this.orderlist = response.data.data;
                 this.orderlist.map( (value,index) =>{
@@ -214,7 +216,7 @@
         overflow: auto;
     }
     .main::-webkit-scrollbar {
-        display:none
+        display:none;
     }
     .header{
         padding: 0 .25rem;
@@ -246,15 +248,14 @@
             margin-left: .26rem;
             .SelectResult{
                 max-width: 3.75rem;
+                padding-right: .2rem;
                 float: right;
                 overflow:hidden;
                 text-overflow:ellipsis;
                 white-space:nowrap;
                 margin-right: .26rem;
-            }
-            .SelectResult:after{
-                content: url("/static/images/right-icon.png");
-                margin-left: .2rem;
+                background: url("/sound-recycle-sales/static/images/right-icon.png") no-repeat right center;
+                background-size: .14rem .26rem;
             }
         }
     }
@@ -276,7 +277,7 @@
         .list-item{
             margin-bottom: .18rem;
             p{
-                line-height: .16rem;
+                line-height: 2;
             }
             .item-top{
                 border-bottom: 1px solid #ddd;
@@ -291,6 +292,7 @@
                     font-size: .28rem;
                     img{
                         vertical-align: middle;
+                        width: .4rem;
                     }
                     label{
 
