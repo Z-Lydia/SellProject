@@ -1,7 +1,7 @@
 <template>
     <div class="gray-wrapper">
         <header class="header white-bg">
-            <img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png" @click="handleReturnClick">
+            <img class="add-people" src="../assets/img/left-icon.png" @click="handleReturnClick">
             <h1>销售帐薄</h1>
         </header>
 
@@ -11,7 +11,7 @@
                 <div class="item-top">
                     <p class="order-num">订单编号：{{info.transMap.order_num}}</p>
                     <p>打包站名称：{{info.transMap.package_site_name}}</p>
-                    <p><img src="/sound-recycle-sales/static/images/enter-icon.png" />{{info.transMap.recycle_factory_name}}</p>
+                    <p><img src="../assets/img/enter-icon.png" />{{info.transMap.recycle_factory_name}}</p>
                 </div>
                 <div class="item-bottom">
                     <p>
@@ -205,7 +205,7 @@
                 params.append('imagePath', this.info.transMap.image_path || '');
                 params.append('comment', this.info.transMap.comment);
 
-                axios.post(baseUrl + '/transreceipt/insertreceipt', params).then((result)=>{
+                axios.post(baseUrl + '/transreceipt/insertreceipt', params, {headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((result)=>{
                     console.log(result);
                     if(result.data.code == 0){
                         Toast({

@@ -1,15 +1,15 @@
 <template>
     <div class="gray-wrapper main">
         <header class="header white-bg">
-            <img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png" @click="handleReturnClick">
+            <img class="add-people" src="../assets/img/left-icon.png" @click="handleReturnClick">
             <h1>账号关联</h1>
         </header>
 
         <div class="container">
             <section class="content-top">
-                <img class="logo" src="/sound-recycle-sales/static/images/wx-logo.png" alt="logo">
-                <img class="icon" src="/sound-recycle-sales/static/images/connect-icon.png" alt="">
-                <img class="wx-pic" src="/sound-recycle-sales/static/images/wx.png" alt="wx">
+                <img class="logo" src="../assets/img/wx-logo.png" alt="logo">
+                <img class="icon" src="../assets/img/connect-icon.png" alt="">
+                <img class="wx-pic" src="../assets/img/wx.png" alt="wx">
             </section>
             <section class="form-wrapper">
                 <form class="form">

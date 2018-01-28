@@ -4,10 +4,10 @@
 			<header class="header white-bg">
 				<!--<div class="filter">
 					<span>报价</span>
-					<img src="/static/images/down-icon.png" alt="">
+					<img src="../assets/img/down-icon.png" alt="">
 				</div>-->
 				<h1>缴款列表</h1>
-				<!--<img class="add-people" src="/static/images/add-people.png" @click="addModal">-->
+				<!--<img class="add-people" src="../assets/img/add-people.png" @click="addModal">-->
 			</header>
 
 			<div class="Select" @click="handleSelectClick">
@@ -18,7 +18,7 @@
 				<div class="recycle-top">
 					<span>回收类别</span>
 					<p v-show="checkValue.length" class="variety">{{filterCheckValues}}</p>
-					<img v-show="checkValue.length===0" class="add-icon" src="/sound-recycle-sales/static/images/add-icon.png" alt=""
+					<img v-show="checkValue.length===0" class="add-icon" src="../assets/img/add-icon.png" alt=""
 					     @click="handleKindSelect">
 				</div>
 				<div class="content">
@@ -133,6 +133,7 @@
 			offerpricelistFn(state){
 				let offerpricelist = state.offerpricelist
 				this.offerpricelist = offerpricelist
+				return offerpricelist
 			},
 			filterCheckValues() {
 				var value = this.checkValue;
@@ -271,7 +272,7 @@
 				params.append('factoryId', factoryId)
 				params.append('typeids', typeids.join(','))
 				params.append('prices', prices.join(','))
-				axios.post(baseUrl + '/paymentof/factorytype', params).then( (res) => {
+				axios.post(baseUrl + '/paymentof/factorytype', params, {headers: {'X-Requested-With': 'XMLHttpRequest'}}).then( (res) => {
 					if(res.data.code == 0){
 						let data = res.data.data
 						this.offerpricelist = data
@@ -355,7 +356,7 @@
 				text-overflow: ellipsis;
 				white-space: nowrap;
 				margin-right: .26rem;
-				background: url("/sound-recycle-sales/static/images/right-icon.png") no-repeat right center;
+				background: url("../assets/img/right-icon.png") no-repeat right center;
 				background-size: .14rem .26rem;
 			}
 		}
@@ -511,7 +512,7 @@
 
 	.kind_checkox {
 		-webkit-appearance: none;
-		background: url("/sound-recycle-sales/static/images/unselected-icon.png") center center no-repeat;
+		background: url("../assets/img/unselected-icon.png") center center no-repeat;
         background-size: 100% 100%;
 		height: .32rem;
 		width: .32rem;
@@ -519,7 +520,7 @@
 	}
 
 	.kind_checkox:checked {
-		background: url("/sound-recycle-sales/static/images/selected-icon.png") center center no-repeat;
+		background: url("../assets/img/selected-icon.png") center center no-repeat;
         background-size: 100% 100%;
         height: .32rem;
         width: .32rem;

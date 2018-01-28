@@ -1,7 +1,7 @@
 <template>
 	<div class="gray-wrapper">
 		<header class="header white-bg">
-			<img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png" @click="handleReturnClick">
+			<img class="add-people" src="../assets/img/left-icon.png" @click="handleReturnClick">
             <h1>销售帐薄</h1>
         </header>
 
@@ -11,7 +11,7 @@
                 <div class="item-top">
                     <p class="order-num">订单编号：{{orderTitle.order_num}}</p>
                     <p>{{orderTitle.package_site_name}}</p>
-                    <p><img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
+                    <p><img src="../assets/img/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
                 </div>
                 <div class="item-bottom">
                     <p>
@@ -131,7 +131,7 @@
             </div>
             <p>纸厂回执：</p>
             <div class="camera-box">
-                <img src="/sound-recycle-sales/static/images/camera2.png" alt="">
+                <img :src="orderTitle.image_path" alt="">
             </div>
         </div>
 	</div>
@@ -154,7 +154,7 @@
 	    	}
 	    },
         mounted(){
-            axios.get(baseUrl + "/transreceipt/selectorderinfo?orderNum=50000311515480994470",{headers: {'X-Requested-With': 'XMLHttpRequest'}})
+            axios.get(baseUrl + "/transreceipt/selectorderinfo?orderNum=" + this.$route.params.id,{headers: {'X-Requested-With': 'XMLHttpRequest'}})
             .then( (response) =>{
                 const {transDetailList,transMap} = response.data;
                 this.orderTitle = transMap;
@@ -180,6 +180,10 @@
 	      font-size: .36rem;
 	      font-weight: normal;
 	    }
+        .add-people{
+            width: 0.14rem;
+            height: 0.26rem;
+        }
   	}
   	.content{
 	    .list-item{

@@ -2,7 +2,7 @@
     <div class="gray-wrapper">
         <header class="header white-bg">
             <router-link to="/search">
-                <img class="add-people" src="/sound-recycle-sales/static/images/left-icon.png">
+                <img class="add-people" src="../assets/img/left-icon.png">
             </router-link>
             <h1>销售帐薄</h1>
         </header>
@@ -11,7 +11,7 @@
             <div class="white-bg detail">
                 <p>订单编号：{{orderTitle.order_num}}</p>
                 <p>打包站名称：{{orderTitle.package_site_name}}</p>
-                <p><img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
+                <p><img src="../assets/img/enter-icon.png" alt="">{{orderTitle.recycle_factory_name}}</p>
                 <p>司机姓名：{{orderTitle.carrier_name}}</p>
                 <p>司机手机：{{orderTitle.carrier_mobile}}</p>
                 <p>发运车牌号：{{orderTitle.carrier_carnum}}</p>
@@ -100,7 +100,7 @@
                         <span>上传单据照片：</span>
                         <div class="right-box imgs">
                           <div class="upload">
-                              <img src="/sound-recycle-sales/static/images/camera.png">
+                              <img src="../assets/img/camera.png">
                               <input ref="photo" type="file" class="file" @change="doUpload">
                           </div>
                         </div>
@@ -227,6 +227,7 @@
                     } )
                 } );
                 //订单信息
+                this.orderTitle.order_num = this.$route.params.id;
                 this.orderTitle.affirmGross = this.affirmGross*1000000;
                 this.orderTitle.affirmTare = this.affirmTare*1000000;
                 this.orderTitle.dross_percent = this.dross_percent*1000000;

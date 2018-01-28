@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="login-bg">
-      <img src="/static/images/login-bg.png" alt="">
+      <img src="../assets/img/login-bg.png" alt="">
     </div>
     <div class="login-box">
       <div class="form-group">
         <span class="num">+86</span>
         <input class="input" type="text" v-model="phone" placeholder="请输入手机号码" />
-        <img class="del" src="/static/images/del-icon.png" />
+        <img class="del" src="../assets/img/del-icon.png" />
       </div>
       <div class="form-group">
         <input type="text" class="code" v-model="code" placeholder="请输入验证码" />

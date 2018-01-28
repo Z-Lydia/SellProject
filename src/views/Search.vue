@@ -2,7 +2,7 @@
     <div class="gray-wrapper main">
         <header class="header white-bg">
            <h1>销售帐薄</h1>
-           <!-- <img class="add-people" src="/static/images/add-people.png" @click="addModal"> -->
+           <!-- <img class="add-people" src="../assets/img/add-people.png" @click="addModal"> -->
         </header>
 
         <div class="container">
@@ -14,23 +14,23 @@
                 <div v-for="orderlistItem in orderlist" class="white-bg list-item" @click="handleOrderClick" :id="orderlistItem.order_num">
                     <div class="item-top">
                         <p>{{orderlistItem.package_site_name}}</p>
-                        <img src="/sound-recycle-sales/static/images/enter-icon.png" alt="">
+                        <img src="../assets/img/enter-icon.png" alt="">
                         <p style="display: inline-block;">{{orderlistItem.recycle_factory_name}}</p>
                         <p class="order-num">订单编号：{{orderlistItem.order_num}}</p>
                     </div>
                     <div class="item-bottom">
                         <p>
-                           <img src="/sound-recycle-sales/static/images/user-icon.png" alt="">
+                           <img src="../assets/img/user-icon.png" alt="">
                            <label>司机姓名：</label>
                            <span>{{orderlistItem.carrier_name}}</span>
                         </p>
                         <p>
-                           <img src="/sound-recycle-sales/static/images/tel-icon2.png" alt="">
+                           <img src="../assets/img/tel-icon2.png" alt="">
                            <label>司机手机号：</label>
                            <span>{{orderlistItem.carrier_mobile}}</span>
                         </p>
                         <p>
-                           <img src="/sound-recycle-sales/static/images/card-icon.png" alt="">
+                           <img src="../assets/img/card-icon.png" alt="">
                            <label>车牌号：</label>
                            <span>{{orderlistItem.carrier_carnum}}</span>
                         </p>
@@ -50,7 +50,7 @@
         <!-- 新增客户模态框 -->
         <div class="my-modal" v-show="mdShowFlag" v-on:close="closeModal">
             <div class="modal-top">
-                <img class="back" src="/sound-recycle-sales/static/images/left-icon.png" @click="closeModal">
+                <img class="back" src="../assets/img/left-icon.png" @click="closeModal">
                 <h1>新增客户</h1>
             </div>
             <div class="modal-body">
@@ -64,7 +64,7 @@
                     <label class="">联系人：</label>
                     <div class="input-box linkman">
                         <input type="text" class="form-control" />
-                        <img class="album" src="/sound-recycle-sales/static/images/album-icon.png" />
+                        <img class="album" src="../assets/img/album-icon.png" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -213,7 +213,6 @@
 <style lang="less" scoped>
     .main{
         height: 100%;
-        overflow: auto;
     }
     .main::-webkit-scrollbar {
         display:none;
@@ -254,7 +253,7 @@
                 text-overflow:ellipsis;
                 white-space:nowrap;
                 margin-right: .26rem;
-                background: url("/sound-recycle-sales/static/images/right-icon.png") no-repeat right center;
+                background: url("../assets/img/right-icon.png") no-repeat right center;
                 background-size: .14rem .26rem;
             }
         }
