@@ -102,7 +102,7 @@
 <style lang="less" scoped>
     .main{
         height: 100%;
-        overflow: auto;
+        overflow: hidden;
     }
     .main::-webkit-scrollbar {
         display:none;

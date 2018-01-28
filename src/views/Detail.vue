@@ -86,7 +86,7 @@
                             <span>{{orderTitle.dross_percent/1000000}}T</span>
                         </div>
                         <div>
-                            <label>扣税：</label>
+                            <label>扣水：</label>
                             <span>{{orderTitle.water_percent/1000000}}T</span>
                         </div>
                         <div>

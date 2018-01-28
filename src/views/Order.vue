@@ -81,7 +81,7 @@
                     <div class="counter-bottom">
                         <div class="counter-text">
                             <span>扣杂</span>
-                            <span>扣税</span>
+                            <span>扣水</span>
                             <span>运费</span>
                         </div>
                         <div class="input-box" style="position: relative;">
@@ -138,7 +138,7 @@
                 affirmGross:'',//到厂毛重
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
-                water_percent:'',//扣税
+                water_percent:'',//扣水
                 car_money:'',//运费
                 infoArr:[],
                 Submit:'Submit',

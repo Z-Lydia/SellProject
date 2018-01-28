@@ -94,6 +94,8 @@
 
 <script>
     import VuePickers from 'vue-pickers'
+    import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
+    import util from '@/assets/js/util.js'
     import axios from 'axios'
     import { mapState } from "vuex"
     export default {
@@ -177,10 +179,18 @@
                 axios.get(baseUrl + "/transreceipt/translist?factoryId="+this.factoryId+"&orderState="+this.isSelect,
                     {headers: {'X-Requested-With': 'XMLHttpRequest'}})
                 .then((response) =>{
-                    this.orderlist = response.data.data;
-                    this.orderlist.map( (value,index) =>{
-                        this.routerlinkId = value.order_num
-                    } );
+                    if(response.data.code == 0){
+                        this.orderlist = response.data.data;
+                        this.orderlist.map( (value,index) =>{
+                            this.routerlinkId = value.order_num
+                        } );
+                    }else{
+                        Toast({
+                          mes:response.data.msg,
+                          timeout:1500,
+                          icon: 'error'
+                      })
+                    }
                 })
                 .catch((err) =>{
                     console.log(err);
@@ -198,21 +208,41 @@
             };
             axios.get(baseUrl + "/transreceipt/translist?orderState=3",{headers: {'X-Requested-With': 'XMLHttpRequest'}})
             .then((response) =>{
-                this.orderlist = response.data.data;
-                this.orderlist.map( (value,index) =>{
-                    this.routerlinkId = value.order_num
-                } );
+                if(response.data.code == 0){
+                    this.orderlist = response.data.data;
+                    this.orderlist.map( (value,index) =>{
+                        this.routerlinkId = value.order_num
+                    } );
+                }else{
+                    Toast({
+                      mes:response.data.msg,
+                      timeout:1500,
+                      icon: 'error'
+                  })
+                }
             })
             .catch((err) =>{
                 console.log(err);
             })
-        }
+        },
+        beforeRouteEnter(to, from, next) {
+             next()
+        },
+        beforeRouteLeave(to, from, next) {
+            if(to.path == '/'){
+                if(util.isWeiXin()){
+                    WeixinJSBridge.call('closeWindow');
+                }
+            }
+            next()
+        },
     }
 </script>
 
 <style lang="less" scoped>
     .main{
         height: 100%;
+        overflow: hidden;
     }
     .main::-webkit-scrollbar {
         display:none;

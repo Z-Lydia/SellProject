@@ -89,6 +89,7 @@
 	import VuePickers from 'vue-pickers'
 	import {mapState} from "vuex"
 	import axios from 'axios'
+	import util from '@/assets/js/util.js'
 
 	export default {
 		data() {
@@ -105,7 +106,7 @@
 				show: false,
 				offerpricelist: [],
 				types: [],
-				typesArr: [],
+				typesArr: []
 			}
 		},
 		computed: mapState({
@@ -133,7 +134,7 @@
 			offerpricelistFn(state){
 				let offerpricelist = state.offerpricelist
 				this.offerpricelist = offerpricelist
-				return offerpricelist
+				return state.offerpricelist;
 			},
 			filterCheckValues() {
 				var value = this.checkValue;
@@ -145,9 +146,35 @@
 				return reValue;
 			}
 		}),
+		mounted() {
+			if (this.$store.getters.shouldGetFactoryInfo) {
+				this.$store.dispatch("getFactoryInfo");
+			}
+			//请求回收类别数据
+			axios.get(baseUrl + '/paymentof/paperfactory',{headers: {'X-Requested-With': 'XMLHttpRequest'}})
+			.then( (response) =>{
+				if( response.status === 200 ){
+					this.offerpricelist = response.data.data.offerpricelist;
+				}
+			} )
+			.catch( (err) =>{
+				console.log(err);
+			} )
+		},
 		components: {
 			VuePickers
 		},
+        beforeRouteEnter(to, from, next) {
+             next()
+        },
+        beforeRouteLeave(to, from, next) {
+            if(to.path == '/'){
+            	if(util.isWeiXin()){
+            		WeixinJSBridge.call('closeWindow');
+            	}
+            }
+            next()
+        },
 		methods: {
 			//新增客户模态框
 			addModal() {
@@ -293,12 +320,6 @@
 					}
 				})
 			}
-		},
-		mounted() {
-			if (this.$store.getters.shouldGetFactoryInfo) {
-				this.$store.dispatch("getFactoryInfo");
-			}
-			this.offerpricelistFn
 		}
 	}
 </script>

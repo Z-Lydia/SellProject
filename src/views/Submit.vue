@@ -88,7 +88,7 @@
                         <span>{{info.transMap.dross_percent/1000000}}T</span>
                     </div>
                     <div>
-                        <label>扣税：</label>
+                        <label>扣水：</label>
                         <span>{{info.transMap.water_percent/1000000}}T</span>
                     </div>
                 </div>
