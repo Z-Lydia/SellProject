@@ -138,6 +138,7 @@
 </template>
 <script>
     import axios from 'axios'
+    import util from '@/assets/js/util.js'
 	export default {
 	    data () {
 	      	return {
@@ -158,6 +159,9 @@
             .then( (response) =>{
                 const {transDetailList,transMap} = response.data;
                 this.orderTitle = transMap;
+                if(this.orderTitle.arrive_time){
+                    this.orderTitle.arrive_time = util.getDateTime(this.orderTitle.arrive_time);
+                }
                 this.orderDetail = transDetailList;
             } )
             .catch( (err) =>{

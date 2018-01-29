@@ -189,7 +189,7 @@
                           mes:response.data.msg,
                           timeout:1500,
                           icon: 'error'
-                      })
+                        })
                     }
                 })
                 .catch((err) =>{
@@ -218,7 +218,7 @@
                       mes:response.data.msg,
                       timeout:1500,
                       icon: 'error'
-                  })
+                    })
                 }
             })
             .catch((err) =>{
@@ -241,11 +241,7 @@
 
 <style lang="less" scoped>
     .main{
-        height: 100%;
-        overflow: hidden;
-    }
-    .main::-webkit-scrollbar {
-        display:none;
+        overflow-x: hidden;
     }
     .header{
         padding: 0 .25rem;

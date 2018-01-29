@@ -217,12 +217,12 @@
                     } );
                     const unitPriceArr = this.$refs.orderDetailItemunitPrice;
                     unitPriceArr.map( (value,map) =>{
-                        const unitPrice = value.value*1000;
+                        const unitPrice = value.value*100;
                         orderDetailItem.unitPrice = unitPrice;
                     } );
                     const totalPriceArr = this.$refs.orderDetailItemtotalPrice;
                     totalPriceArr.map( (value,index) =>{
-                        const totalPrice = value.value*1000;
+                        const totalPrice = value.value*100;
                         orderDetailItem.totalPrice = totalPrice
                     } )
                 } );
@@ -232,11 +232,11 @@
                 this.orderTitle.affirmTare = this.affirmTare*1000000;
                 this.orderTitle.dross_percent = this.dross_percent*1000000;
                 this.orderTitle.water_percent = this.water_percent*1000000;
-                this.orderTitle.car_money = this.car_money*1000;
+                this.orderTitle.car_money = this.car_money*100;
                 this.orderTitle.comment = this.$refs.message.value;
                 this.orderTitle.imagePath = this.imagePath
                 //到达时间
-                const date = new Date().toLocaleString();
+                const date = new Date().getTime();
                 this.orderTitle.addirmTime = date;
                 //localStorag
                 const orderTitleInfo = JSON.stringify(this.orderTitle)

@@ -101,11 +101,7 @@
 
 <style lang="less" scoped>
     .main{
-        height: 100%;
-        overflow: hidden;
-    }
-    .main::-webkit-scrollbar {
-        display:none;
+        overflow-x: hidden;
     }
     .header{
         padding: 0 .25rem;

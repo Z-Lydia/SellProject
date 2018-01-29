@@ -145,6 +145,7 @@
 
 <script>
     import axios from 'axios';
+    import util from '@/assets/js/util.js'
     import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog';
     export default {
         data () {
@@ -181,7 +182,10 @@
                     transDetailList.push(JSON.parse( str ));
                 } );
                 this.info.transMap = transMap;
-                this.info.transDetailList = transDetailList
+                this.info.transDetailList = transDetailList;
+                if(this.info.transMap.addirmTime){
+                    this.info.transMap.addirmTime = util.getDateTime(this.info.transMap.addirmTime);
+                }
             },
             //返回
             handleReturnClick(){
@@ -244,6 +248,10 @@
             flex: 1;
             text-align: center;
             font-size: .36rem;
+        }
+        .add-people{
+            width: .14rem;
+            height: .26rem;
         }
     }
     .content{
