@@ -38,6 +38,7 @@
 
 <script>
     import axios from 'axios'
+    import util from '@/assets/js/util.js'
     import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog'
     export default {
         data () {
@@ -92,6 +93,17 @@
                     console.log(error);
                 })
             }
+        },
+        beforeRouteEnter(to, from, next) {
+             next()
+        },
+        beforeRouteLeave(to, from, next) {
+            if(to.path == '/'){
+                if(util.isWeiXin()){
+                    WeixinJSBridge.call('closeWindow');
+                }
+            }
+            next()
         },
         mounted(){
 

@@ -132,7 +132,7 @@
             </div>
             <p>纸厂回执：</p>
             <div class="camera-box">
-                <img class="img" :src="info.transMap.imagePath" alt="图片">
+                <img class="img" :src="info.transMap.image_path" alt="图片">
             </div>
         </div>
 
@@ -182,6 +182,8 @@
                     transDetailList.push(JSON.parse( str ));
                 } );
                 this.info.transMap = transMap;
+                console.log('============')
+                console.log(this.info.transMap)
                 this.info.transDetailList = transDetailList;
                 if(this.info.transMap.addirmTime){
                     this.info.transMap.addirmTime = util.getDateTime(this.info.transMap.addirmTime);
@@ -347,7 +349,8 @@
         }
         .camera-box{
             width: 100%;
-            height: 1.5rem;
+            min-height: 3rem;
+            max-height: 5rem;
             position: relative;
             .img{
                 width: 100%;

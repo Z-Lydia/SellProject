@@ -129,8 +129,8 @@
             <div class="ps">
                 {{orderTitle.comment}}
             </div>
-            <p>纸厂回执：</p>
-            <div class="camera-box">
+            <p v-if="orderTitle.image_path">单据照片：</p>
+            <div class="camera-box" v-if="orderTitle.image_path">
                 <img :src="orderTitle.image_path" alt="">
             </div>
         </div>

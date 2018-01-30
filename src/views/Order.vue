@@ -19,7 +19,7 @@
 
             <div>
                 <div>
-                    <div class="white-bg weight-box" v-for="orderDetailItem in orderDetail">
+                    <div class="white-bg weight-box" v-for="(orderDetailItem,index) in orderDetail">
                         <div class="type-box">
                             <p>回收分类：<span>{{orderDetailItem.recycleTypeTitle}}</span></p>
                         </div>
@@ -27,7 +27,7 @@
                             <div class="send">发运净重：<span class="gray">{{orderDetailItem.transportWeight/1000000}}T</span></div>
                             <div class="receive">
                                 <span>到厂净重：</span>
-                                <input :ref="'orderDetailItem'+'affirmNet'" class="input" type="text" />
+                                <input :ref="'orderDetailItem'+'affirmNet'" class="input" type="text" @blur="getCountWeight(orderDetailItem,$event)" />
                                 <span class="gray">T</span>
                             </div>
                         </div>
@@ -48,11 +48,11 @@
                                     <span>分类应收</span>
                                 </div>
                                 <div class="input-box">
-                                    <input type="text" @blur="handleGetWeight"/>
+                                    <input type="text" disabled="disabled" v-model="orderDetailItem.weight" />
                                     <span>*</span>
                                     <input :ref="'orderDetailItem'+'unitPrice'" type="text" @blur="handleGetPrice" />
                                     <span>=</span>
-                                    <input :ref="'orderDetailItem'+'totalPrice'" readonly type="text" />
+                                    <input :ref="'orderDetailItem'+'totalPrice'" disabled="disabled" type="text" />
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                         <div class="right-box imgs">
                           <div class="upload">
                               <img src="../assets/img/camera.png">
-                              <input ref="photo" type="file" class="file" @change="doUpload">
+                              <input ref="photos" type="file" class="file" accept="image/*" capture="camera" @change="doUpload">
                           </div>
                         </div>
                     </div>
@@ -133,8 +133,8 @@
                 mdShowFlag:false,
                 orderTitle:{},//司机信息
                 orderDetail:[],//分类信息
-                weight:'',//结算净重
-                price:'',//结算单价
+                //weight:'',//结算净重
+                //price:'',//结算单价
                 affirmGross:'',//到厂毛重
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
@@ -149,29 +149,41 @@
 
         },
         methods:{
-            handleGetWeight(e){
-                var target = e.target;
-                var total = target.parentNode.lastChild;
-                this.weight = e.target.value;
-                if( this.price ){
-                    total.value=this.weight*this.price
-                    this.weight=0
-                    this.price=0
-                }else{
-                    total.value=""
-                }
-            },
+            // handleGetWeight(e){
+            //     var target = e.target;
+            //     var total = target.parentNode.lastChild;
+            //     var priceInput = target.parentNode.children[2];
+            //     var price = priceInput.value;
+            //     var weight = e.target.value;
+            //     if( price ){
+            //       total.value = weight * price;
+            //     }else{
+            //       total.value = ""
+            //     }
+            //     // var total = target.parentNode.lastChild;
+            //     // this.weight = e.target.value;
+            //     // if( this.price ){
+            //     //     total.value = this.weight * this.price
+            //     //     this.weight = 0
+            //     //     this.price = 0
+            //     // }else{
+            //     //     total.value = ""
+            //     // }
+            // },
             handleGetPrice(e){
                 var target = e.target;
                 var total = target.parentNode.lastChild;
-                this.price = e.target.value;
-                if( this.weight ){
-                    total.value=this.weight*this.price
-                    this.weight=0
-                    this.price=0
+                var priceInput = target.parentNode.children[0];
+                var weight = priceInput.value;
+                var price = e.target.value;
+                if( weight ){
+                  total.value = weight * price;
                 }else{
-                    total.value=""
+                  total.value = ""
                 }
+            },
+            getCountWeight(item,e){
+              item.weight = e.target.value;
             },
             doUpload(e){
                 var that = this;
@@ -198,6 +210,19 @@
                         that.imagePath = this.result;
                     }
                     File.readAsDataURL(files);
+                }
+            },
+            //检测安卓、苹果设备
+            checkDevice(){
+                var u = navigator.userAgent; 
+                var ua = navigator.userAgent.toLowerCase(); 
+                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端 
+                var isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端 
+                if(isAndroid){
+                    // this.$refs.photos.removeAttribute("capture");
+                }else if(isIos){
+                    this.$refs.photos.removeAttribute("capture");
+                    this.$refs.photos.removeAttribute("accept");
                 }
             },
             hindleSubmitClick(){
@@ -234,7 +259,7 @@
                 this.orderTitle.water_percent = this.water_percent*1000000;
                 this.orderTitle.car_money = this.car_money*100;
                 this.orderTitle.comment = this.$refs.message.value;
-                this.orderTitle.imagePath = this.imagePath
+                this.orderTitle.image_path = this.imagePath
                 //到达时间
                 const date = new Date().getTime();
                 this.orderTitle.addirmTime = date;
@@ -255,13 +280,19 @@
         mounted(){
             axios.get(baseUrl + "/transreceipt/selectorderinfo?orderNum="+this.$route.params.id,{headers: {'X-Requested-With': 'XMLHttpRequest'}} )
             .then( (response) =>{
-                const {transDetailList,transMap} = response.data;
-                this.orderTitle = transMap;
-                this.orderDetail = transDetailList;
+                //const {transDetailList,transMap} = response.data;
+                this.orderTitle = response.data.transMap;
+                var orderDetail = response.data.transDetailList;
+                orderDetail.forEach(function(item,index){
+                  item.weight = '';
+                })
+                this.orderDetail = orderDetail;
             } )
             .catch( (err) =>{
                 console.log(err);
             } )
+            //检测安卓、苹果设备
+            this.checkDevice();
         }
     }
 </script>
@@ -423,7 +454,10 @@
     }
     .pics{
       img{
-        width: 100%;
+        display: block;
+        max-width: 100%;
+        max-height: 4.5rem;
+        margin: 0.1rem auto;
       }
     }
     .ps{
