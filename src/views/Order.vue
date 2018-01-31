@@ -27,7 +27,7 @@
                             <div class="send">发运净重：<span class="gray">{{orderDetailItem.transportWeight/1000000}}T</span></div>
                             <div class="receive">
                                 <span>到厂净重：</span>
-                                <input :ref="'orderDetailItem'+'affirmNet'" class="input" type="text" @blur="getCountWeight(orderDetailItem,$event)" />
+                                <input :ref="'orderDetailItem'+'affirmNet'" class="input" value="" type="text" @blur="getCountWeight(orderDetailItem,$event)" />
                                 <span class="gray">T</span>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="send">发运包数：<span class="gray">{{orderDetailItem.packageNum}}个</span></div>
                             <div class="receive">
                                 <span>到厂包数：</span>
-                                <input :ref="'orderDetailItem'+'affirmPackageNum'" class="input" type="text" />
+                                <input :ref="'orderDetailItem'+'affirmPackageNum'" value="" class="input" type="text" />
                                 <span class="gray">个</span>
                             </div>
                         </div>
@@ -43,14 +43,14 @@
                         <div class="white-bg counter-box">
                             <div>
                                 <div class="counter-text">
-                                    <span>结算净重</span>
-                                    <span>结算单价</span>
-                                    <span>分类应收</span>
+                                    <span>结算净重(T)</span>
+                                    <span>结算单价(元)</span>
+                                    <span>分类应收(元)</span>
                                 </div>
                                 <div class="input-box">
                                     <input type="text" disabled="disabled" v-model="orderDetailItem.weight" />
                                     <span>*</span>
-                                    <input :ref="'orderDetailItem'+'unitPrice'" type="text" @blur="handleGetPrice" />
+                                    <input :ref="'orderDetailItem'+'unitPrice'" value="" type="text" @blur="handleGetPrice" />
                                     <span>=</span>
                                     <input :ref="'orderDetailItem'+'totalPrice'" disabled="disabled" type="text" />
                                 </div>
@@ -133,8 +133,6 @@
                 mdShowFlag:false,
                 orderTitle:{},//司机信息
                 orderDetail:[],//分类信息
-                //weight:'',//结算净重
-                //price:'',//结算单价
                 affirmGross:'',//到厂毛重
                 affirmTare:'',//到厂皮重
                 dross_percent:'',//扣杂
@@ -149,27 +147,7 @@
 
         },
         methods:{
-            // handleGetWeight(e){
-            //     var target = e.target;
-            //     var total = target.parentNode.lastChild;
-            //     var priceInput = target.parentNode.children[2];
-            //     var price = priceInput.value;
-            //     var weight = e.target.value;
-            //     if( price ){
-            //       total.value = weight * price;
-            //     }else{
-            //       total.value = ""
-            //     }
-            //     // var total = target.parentNode.lastChild;
-            //     // this.weight = e.target.value;
-            //     // if( this.price ){
-            //     //     total.value = this.weight * this.price
-            //     //     this.weight = 0
-            //     //     this.price = 0
-            //     // }else{
-            //     //     total.value = ""
-            //     // }
-            // },
+            //结算单价
             handleGetPrice(e){
                 var target = e.target;
                 var total = target.parentNode.lastChild;
@@ -182,9 +160,11 @@
                   total.value = ""
                 }
             },
+            //结算净重
             getCountWeight(item,e){
               item.weight = e.target.value;
             },
+            //图片上传
             doUpload(e){
                 var that = this;
                 var files = e.target.files[0];
@@ -196,20 +176,10 @@
                   })
                   return;
                 }
-                if(files.size > 20*1024*1024){
-                  Toast({
-                      mes:'图片不能大于20M',
-                      timeout:1500,
-                      icon: 'error'
-                  })
-                  return;
-                }
                 if( files ){
-                    var File = new FileReader();
-                    File.onload = function(){
-                        that.imagePath = this.result;
-                    }
-                    File.readAsDataURL(files);
+                    this.$dialog.loading.open('图片压缩上传中...');
+                    var url = this.getObjectURL(files);
+                    this.press(url);
                 }
             },
             //检测安卓、苹果设备
@@ -225,14 +195,126 @@
                     this.$refs.photos.removeAttribute("accept");
                 }
             },
+            //图片文件转换成blob地址
+            getObjectURL(file) {
+                var url = null ; 
+                if (window.createObjectURL!=undefined) {  // basic
+                  url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) {       // mozilla(firefox)
+                  url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // web_kit or chrome
+                  url = window.webkitURL.createObjectURL(file) ;
+                }
+                return url ;
+            },
+            //图片压缩
+            press(url) {
+                var that = this;
+                var canvas = document.createElement('canvas'); 
+                var ctx = canvas.getContext('2d'); 
+                var img = new Image(); 
+                img.crossOrigin = 'Anonymous'; 
+                img.onload = function(){
+                  var width = img.width;
+                  var height = img.height;
+                  // 按比例压缩4倍
+                  var rate = (width<height ? width/height : height/width)/4;
+                  canvas.width = width*rate; 
+                  canvas.height = height*rate; 
+                  ctx.drawImage(img,0,0,width,height,0,0,width*rate,height*rate); 
+                  var dataURL = canvas.toDataURL('image/png'); 
+                  canvas = null;
+                  that.imagePath = dataURL;
+                  that.$dialog.loading.close();
+                };
+                img.src = url; 
+            },
+            //点击收单
             hindleSubmitClick(){
+                let a = [], flagA = true;
+                let b = [], flagB = true;
+                let c = [], flagC = true;
+                const affirmWeightArr = this.$refs.orderDetailItemaffirmNet;
+                affirmWeightArr.forEach( (value,index) =>{
+                  a.push(value.value);
+                } );
+                
+                const affirmPackageNumArr = this.$refs.orderDetailItemaffirmPackageNum;
+                affirmPackageNumArr.forEach( (value,map) =>{
+                  b.push(value.value);
+                } );
+                
+                const unitPriceArr = this.$refs.orderDetailItemunitPrice;
+                unitPriceArr.forEach( (value,map) =>{
+                  c.push(value.value)
+                } );
+
+                a.forEach((item,index) =>{
+                    if(!item || (item <= 0)){
+                        flagA = false;
+                    }
+                })
+                b.forEach((item,index) =>{
+                    if(!item || (item <= 0)){
+                        flagB = false;
+                    }
+                })
+                c.forEach((item,index) =>{
+                    if(!item || (item <= 0)){
+                        flagC = false;
+                    }
+                })
+
+                if(!flagA){
+                  Toast({
+                      mes: '请填写到厂净重',
+                      timeout: 1500,
+                      icon: 'fail'
+                  });
+                  return false;
+                }
+                if(!flagB){
+                  Toast({
+                      mes: '请填写到厂包数',
+                      timeout: 1500,
+                      icon: 'fail'
+                  });
+                  return false;
+                }
+                if(!flagC){
+                  Toast({
+                      mes: '请填写结算单价',
+                      timeout: 1500,
+                      icon: 'fail'
+                  });
+                  return false;
+                }
+
+                if(!this.affirmGross){
+                    Toast({
+                        mes: '请填写到厂毛重',
+                        timeout: 1500,
+                        icon: 'fail'
+                    });
+                    return
+                }
+
+                if(!this.affirmTare){
+                    Toast({
+                        mes: '请填写到厂皮重',
+                        timeout: 1500,
+                        icon: 'fail'
+                    });
+                    return
+                }
+
                 //分类信息
                 this.orderDetail.map( (value,index) =>{
                     const affirmWeightArr = this.$refs.orderDetailItemaffirmNet;
                     const orderDetailItem = value;
                     affirmWeightArr.map( (value,index) =>{
                         const affirmWeight = value.value*1000000;
-                        orderDetailItem.affirmWeight = affirmWeight
+                        orderDetailItem.affirmWeight = affirmWeight;
 
                     } );
                     const affirmPackageNumArr = this.$refs.orderDetailItemaffirmPackageNum;
@@ -248,7 +330,7 @@
                     const totalPriceArr = this.$refs.orderDetailItemtotalPrice;
                     totalPriceArr.map( (value,index) =>{
                         const totalPrice = value.value*100;
-                        orderDetailItem.totalPrice = totalPrice
+                        orderDetailItem.totalPrice = totalPrice;
                     } )
                 } );
                 //订单信息
@@ -259,7 +341,7 @@
                 this.orderTitle.water_percent = this.water_percent*1000000;
                 this.orderTitle.car_money = this.car_money*100;
                 this.orderTitle.comment = this.$refs.message.value;
-                this.orderTitle.image_path = this.imagePath
+                this.orderTitle.image_path = this.imagePath;
                 //到达时间
                 const date = new Date().getTime();
                 this.orderTitle.addirmTime = date;
@@ -375,7 +457,7 @@
     .counter-text{
       span{
         display: inline-block;
-        width: 1.2rem;
+        /*width: 1.3rem;*/
         &:nth-of-type(2){
           margin: 0 .8rem;
         }

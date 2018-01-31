@@ -56,6 +56,7 @@
             //     console.log('get code')
             // },
             handleConnect(){
+                var _this = this;
                 if(!this.mobile){
                     Toast({
                         mes:'请输入手机号码',
@@ -71,7 +72,7 @@
                     })
                     return;
                 }
-                axios.get(baseUrl + '/login/boundsales?mobile=' + this.mobile,{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((result)=>{
+                axios.get(baseUrl + '/login/boundsales?mobile=' + _this.mobile,{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((result)=>{
                     console.log(result);
                     if(result.data.code == 0){
                         Toast({
@@ -79,7 +80,26 @@
                             timeout:1500,
                             icon: 'success',
                             callback: () => {
-                                this.$router.push({ path: '/' });
+                                //判断角色 0销售 1采集
+                                  axios.get(baseUrl + '/login/getusertype',{headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((res)=>{
+                                    console.log(res)
+                                      let data = res.data;
+                                      if(data.code === 0) {
+                                          if(data.data === 1){
+                                              _this.$router.push({ path: '/search' });
+                                          }else if(data.data === 0){
+                                              _this.$router.push({ path: '/list' });
+                                          }
+                                      }else{
+                                          Toast({
+                                              mes:res.data.msg,
+                                              timeout:1500,
+                                              icon: 'error'
+                                          })
+                                      }
+                                  }).catch((error) =>{
+                                    console.log(error);
+                                  })
                             }
                         })
                     }else{

@@ -117,10 +117,10 @@
                         <label>到厂毛重：</label>
                         <span>{{info.transMap.affirmGross/1000000}}T</span>
                     </div>
-                    <div>
+<!--                     <div>
                         <label>应收总款：</label>
                         <span>{{info.transMap.return_money/100}}元</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -197,17 +197,17 @@
             submitFn(){
                 let detailData = [];
                 this.info.transDetailList.map((item,index) =>{
-                  detailData.push(item.recycleTypeId + ':' + (item.affirmWeight?item.affirmWeight:0) + ':' + (item.packageNum?item.packageNum:0) + ':' + (item.unitPrice?item.unitPrice:0) + ':' + (item.totalPrice?item.totalPrice:0));
+                  detailData.push(item.recycleTypeId + ':' + (item.affirmWeight?parseInt(item.affirmWeight):0) + ':' + (item.packageNum?item.packageNum:0) + ':' + (item.unitPrice?parseInt(item.unitPrice):0) + ':' + (item.totalPrice?parseInt(item.totalPrice):0));
                 })
 
                 var params = new URLSearchParams();
                 params.append('orderNum', this.info.transMap.order_num || 0);
-                params.append('grossWeight', this.info.transMap.gross_weight || 0);
-                params.append('tareWeight', this.info.transMap.tare_weight || 0);
+                params.append('grossWeight', parseInt(this.info.transMap.gross_weight) || 0);
+                params.append('tareWeight', parseInt(this.info.transMap.tare_weight) || 0);
                 params.append('detail', detailData.join(',') || '');
-                params.append('waterPercent', this.info.transMap.water_percent || 0);
-                params.append('drossPercent', this.info.transMap.dross_percent || 0);
-                params.append('carMoney', this.info.transMap.car_money || 0);
+                params.append('waterPercent', parseInt(this.info.transMap.water_percent) || 0);
+                params.append('drossPercent', parseInt(this.info.transMap.dross_percent) || 0);
+                params.append('carMoney', parseInt(this.info.transMap.car_money) || 0);
                 params.append('imagePath', this.info.transMap.image_path || '');
                 params.append('comment', this.info.transMap.comment);
 
