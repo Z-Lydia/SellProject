@@ -276,11 +276,11 @@
     }
     .camera-box{
       width: 100%;
-      height: 1.5rem;
+      height: auto;
       position: relative;
       img{
         width: 100%;
-        height: 100%;
+        max-height: 4.5rem;
       }
     }
   }

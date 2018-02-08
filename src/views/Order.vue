@@ -35,7 +35,7 @@
                             <div class="send">发运包数：<span class="gray">{{orderDetailItem.packageNum}}个</span></div>
                             <div class="receive">
                                 <span>到厂包数：</span>
-                                <input :ref="'orderDetailItem'+'affirmPackageNum'" value="" class="input" type="text" />
+                                <input :ref="'orderDetailItem'+'affirmPackageNum'" value="" class="input" type="text" maxlength="9" onkeyup="this.value=this.value.replace(/[^\d]/g, '')" />
                                 <span class="gray">个</span>
                             </div>
                         </div>
@@ -234,6 +234,7 @@
                 let a = [], flagA = true;
                 let b = [], flagB = true;
                 let c = [], flagC = true;
+                
                 const affirmWeightArr = this.$refs.orderDetailItemaffirmNet;
                 affirmWeightArr.forEach( (value,index) =>{
                   a.push(value.value);
@@ -252,6 +253,8 @@
                 a.forEach((item,index) =>{
                     if(!item || (item <= 0)){
                         flagA = false;
+                    }else if(!item.match(/^(([0-9]{1,3})|([0-9]{1}\.[0-9]{1,6})|([1-9]{1}[0-9]{0,2}\.[0-9]{0,6})|([1-9]{1}[0-9]{1,2}))$/)){
+                        flagA = false;
                     }
                 })
                 b.forEach((item,index) =>{
@@ -262,12 +265,14 @@
                 c.forEach((item,index) =>{
                     if(!item || (item <= 0)){
                         flagC = false;
+                    }else if(!item.match(/^(([0-9]{1})|([0-9]{1}\.[0-9]{1,2})|([1-9]{1}[0-9]{0,6}\.[0-9]{0,2})|([1-9]{1}[0-9]{1,6}))$/)){
+                        flagC = false;
                     }
                 })
 
                 if(!flagA){
                   Toast({
-                      mes: '请填写到厂净重',
+                      mes: '请填写到厂净重,整数位不能超过3位,小数位不能超过6位',
                       timeout: 1500,
                       icon: 'fail'
                   });
@@ -283,7 +288,7 @@
                 }
                 if(!flagC){
                   Toast({
-                      mes: '请填写结算单价',
+                      mes: '请填写结算单价,不能超过999999',
                       timeout: 1500,
                       icon: 'fail'
                   });
@@ -297,6 +302,13 @@
                         icon: 'fail'
                     });
                     return
+                }else if(!this.affirmGross.match(/^(([0-9]{1,3})|([0-9]{1}\.[0-9]{1,6})|([1-9]{1}[0-9]{0,2}\.[0-9]{0,6})|([1-9]{1}[0-9]{1,2}))$/)){
+                    Toast({
+                        mes: '到厂毛重整数位不能超过3位,小数位不能超过6位',
+                        timeout: 1500,
+                        icon: 'fail'
+                    });
+                    return
                 }
 
                 if(!this.affirmTare){
@@ -306,32 +318,24 @@
                         icon: 'fail'
                     });
                     return
+                }else if(!this.affirmTare.match(/^(([0-9]{1,3})|([0-9]{1}\.[0-9]{1,6})|([1-9]{1}[0-9]{0,2}\.[0-9]{0,6})|([1-9]{1}[0-9]{1,2}))$/)){
+                    Toast({
+                        mes: '到厂皮重整数位不能超过3位,小数位不能超过6位',
+                        timeout: 1500,
+                        icon: 'fail'
+                    });
+                    return
                 }
 
                 //分类信息
-                this.orderDetail.map( (value,index) =>{
-                    const affirmWeightArr = this.$refs.orderDetailItemaffirmNet;
-                    const orderDetailItem = value;
-                    affirmWeightArr.map( (value,index) =>{
-                        const affirmWeight = value.value*1000000;
-                        orderDetailItem.affirmWeight = affirmWeight;
+                //结算总价
+                const totalPriceArr = this.$refs.orderDetailItemtotalPrice;
 
-                    } );
-                    const affirmPackageNumArr = this.$refs.orderDetailItemaffirmPackageNum;
-                    affirmPackageNumArr.map( (value,map) =>{
-                        const affirmPackageNum = value.value;
-                        orderDetailItem.affirmPackageNum = affirmPackageNum;
-                    } );
-                    const unitPriceArr = this.$refs.orderDetailItemunitPrice;
-                    unitPriceArr.map( (value,map) =>{
-                        const unitPrice = value.value*100;
-                        orderDetailItem.unitPrice = unitPrice;
-                    } );
-                    const totalPriceArr = this.$refs.orderDetailItemtotalPrice;
-                    totalPriceArr.map( (value,index) =>{
-                        const totalPrice = value.value*100;
-                        orderDetailItem.totalPrice = totalPrice;
-                    } )
+                this.orderDetail.forEach( (value,index) =>{
+                    value.affirmWeight = affirmWeightArr[index].value*1000000;
+                    value.affirmPackageNum = affirmPackageNumArr[index].value;
+                    value.unitPrice = unitPriceArr[index].value*100;
+                    value.totalPrice = totalPriceArr[index].value*100;
                 } );
                 //订单信息
                 this.orderTitle.order_num = this.$route.params.id;
@@ -348,7 +352,7 @@
                 //localStorag
                 const orderTitleInfo = JSON.stringify(this.orderTitle)
                 const orderDetailInfoArr=[];
-                this.orderDetail.map( (value,index) =>{
+                this.orderDetail.forEach( (value,index) =>{
                     orderDetailInfoArr.push( JSON.stringify(value) )
                 } )
                 const orderDetailInfo = orderDetailInfoArr.toString();

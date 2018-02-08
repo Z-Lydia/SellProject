@@ -195,9 +195,10 @@
             },
             //提交
             submitFn(){
+                this.$dialog.loading.open('提交中...');
                 let detailData = [];
                 this.info.transDetailList.map((item,index) =>{
-                  detailData.push(item.recycleTypeId + ':' + (item.affirmWeight?parseInt(item.affirmWeight):0) + ':' + (item.packageNum?item.packageNum:0) + ':' + (item.unitPrice?parseInt(item.unitPrice):0) + ':' + (item.totalPrice?parseInt(item.totalPrice):0));
+                  detailData.push(item.recycleTypeId + ':' + (item.affirmWeight?parseInt(item.affirmWeight):0) + ':' + (item.affirmPackageNum?item.affirmPackageNum:0) + ':' + (item.unitPrice?parseInt(item.unitPrice):0) + ':' + (item.totalPrice?parseInt(item.totalPrice):0));
                 })
 
                 var params = new URLSearchParams();
@@ -212,8 +213,10 @@
                 params.append('comment', this.info.transMap.comment);
 
                 axios.post(baseUrl + '/transreceipt/insertreceipt', params, {headers: {'X-Requested-With': 'XMLHttpRequest'}}).then((result)=>{
+                    console.log('-------------')
                     console.log(result);
                     if(result.data.code == 0){
+                        this.$dialog.loading.close();
                         Toast({
                             mes: '提交成功！',
                             timeout: 1500,
@@ -224,6 +227,7 @@
                             }
                         });
                     }else{
+                        this.$dialog.loading.close();
                         Toast({
                             mes: result.data.msg,
                             timeout: 1500,
@@ -232,7 +236,9 @@
                     }
                 }).catch((error) => {
                     console.log(error);
+                    this.$dialog.loading.close();
                 })
+
             }
         }
   }

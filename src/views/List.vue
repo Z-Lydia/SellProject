@@ -28,7 +28,7 @@
 							<label>回收类别明细：{{item.value}}</label>
 							<div class="now-price">
 								<b>税前现价</b>
-								<input type="text" class="input" :id="item.id" ref="PriceInput" onkeyup="this.value=this.value.replace(/[^\d\.]/g, '')">
+								<input type="text" class="input" :id="item.id" ref="PriceInput" maxlength="8" onkeyup="this.value=this.value.replace(/[^\d]/g, '')">
 								<span>元/T</span>
 							</div>
 						</li>
